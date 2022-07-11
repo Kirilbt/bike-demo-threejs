@@ -10,8 +10,11 @@ export default class World {
     this.scene = this.experience.scene
     this.canvas = this.experience.canvas
     this.camera = this.experience.camera
+    this.resources = this.experience.resources
 
-    this.bike = new Bike()
+    this.resources.on('ready', () => {
+      this.bike = new Bike()
+    })
   }
 
   resize() {
