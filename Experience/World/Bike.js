@@ -10,13 +10,16 @@ export default class Bike {
     this.actualBike = this.bike.scene
 
     this.setModel()
+
+    console.log(this.actualBike.children[0].children);
   }
 
   setModel() {
     // Shadows
-    this.actualBike.children.forEach(child => {
+    this.actualBike.children[0].children.forEach(child => {
       child.castShadow = true
       child.receiveShadow = true
+      // console.log(child);
 
       if (child instanceof THREE.Group) {
         child.children.forEach((groupchild) => {

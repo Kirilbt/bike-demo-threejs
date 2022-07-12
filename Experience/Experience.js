@@ -3,6 +3,7 @@ import * as THREE from 'three'
 import Sizes from './Utils/Sizes.js'
 import Time from './Utils/Time.js'
 import Resources from './Utils/Resources.js'
+import Debug from './Utils/Debug.js'
 import assets from './Utils/assets.js'
 
 import Camera from './Camera.js'
@@ -19,6 +20,7 @@ export default class Experience {
     Experience.instance = this
     this.canvas = canvas
     this.scene = new THREE.Scene()
+    this.debug = new Debug()
     this.sizes = new Sizes()
     this.time = new Time()
     this.camera = new Camera()
