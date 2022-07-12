@@ -1,8 +1,13 @@
 export default [
+  // {
+  //   name: 'bike',
+  //   type: 'gltfModel',
+  //   path: '/models/bike-model.gltf'
+  // },
   {
     name: 'bike',
-    type: 'gltfModel',
-    path: '/models/bike-model.gltf'
+    type: 'glbModel',
+    path: '/models/bike-model.glb'
   },
   {
     name: 'screen',

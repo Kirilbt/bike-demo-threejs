@@ -12,29 +12,6 @@ export default class Camera {
     this.createPerspectiveCamera()
     this.createOrthographicCamera() // Check if it works for the project
     this.setOrbitControls()
-  }
-
-  createPerspectiveCamera() {
-    this.perspectiveCamera = new THREE.PerspectiveCamera(
-      35,
-      this.sizes.aspect,
-      0.1, 1000
-    )
-    this.scene.add(this.perspectiveCamera)
-    this.perspectiveCamera.position.z = 5
-  }
-
-  createOrthographicCamera() {
-    this.frustrum = 5
-    this.orthographicCamera = new THREE.OrthographicCamera(
-      (-this.sizes.aspect * this.sizes.frustrum) / 2,
-      (this.sizes.aspect * this.sizes.frustrum) / 2,
-      this.sizes.frustrum / 2,
-      -this.sizes.frustrum / 2,
-      -100,
-      100
-    )
-    this.scene.add(this.orthographicCamera)
 
     // Grid Helper
     const size = 10;
@@ -46,6 +23,32 @@ export default class Camera {
     // Axes Helper
     const axesHelper = new THREE.AxesHelper(10);
     this.scene.add(axesHelper);
+  }
+
+  createPerspectiveCamera() {
+    this.perspectiveCamera = new THREE.PerspectiveCamera(
+      35,
+      this.sizes.aspect,
+      0.1,
+      1000
+    )
+    this.scene.add(this.perspectiveCamera)
+    this.perspectiveCamera.position.x = 1;
+    this.perspectiveCamera.position.y = 2;
+    this.perspectiveCamera.position.z = 6;
+  }
+
+  createOrthographicCamera() {
+    this.frustum = 5
+    this.orthographicCamera = new THREE.OrthographicCamera(
+      (-this.sizes.aspect * this.sizes.frustum ) / 2,
+      (this.sizes.aspect * this.sizes.frustum ) / 2,
+      this.sizes.frustum  / 2,
+      -this.sizes.frustum  / 2,
+      -100,
+      100
+    )
+    this.scene.add(this.orthographicCamera)
   }
 
   setOrbitControls() {
