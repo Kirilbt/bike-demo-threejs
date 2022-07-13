@@ -1,6 +1,8 @@
 import * as THREE from 'three'
-import Experience from "./Experience.js"
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+
+import Experience from './Experience.js'
+import Bike from './World/Bike.js'
 
 export default class Camera {
   constructor() {
@@ -8,6 +10,7 @@ export default class Camera {
     this.sizes = this.experience.sizes
     this.scene = this.experience.scene
     this.canvas = this.experience.canvas
+    this.bike = this.experience.bike
 
     this.createPerspectiveCamera()
     this.createOrthographicCamera() // Check if it works for the project
@@ -33,9 +36,9 @@ export default class Camera {
       1000
     )
     this.scene.add(this.perspectiveCamera)
-    this.perspectiveCamera.position.x = 1;
-    this.perspectiveCamera.position.y = 2;
-    this.perspectiveCamera.position.z = 6;
+    this.perspectiveCamera.position.x = 1
+    this.perspectiveCamera.position.y = 2
+    this.perspectiveCamera.position.z = 7
   }
 
   createOrthographicCamera() {
