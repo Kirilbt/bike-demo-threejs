@@ -25,6 +25,8 @@ export default class World {
   }
 
   update() {
-
+    if(this.bike) {
+      this.bike.update()
+    }
   }
 }
