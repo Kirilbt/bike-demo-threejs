@@ -13,11 +13,16 @@ export default class Bike {
   }
 
   setModel() {
-    // Shadows
+
     this.actualBike.traverse((child) => {
       if(child instanceof THREE.Mesh) {
-          child.castShadow = true
-          child.receiveShadow = true
+        // Shadows
+        child.castShadow = true
+        child.receiveShadow = true
+
+        // Material
+        child.material = new THREE.MeshStandardMaterial
+        child.material.color.set(0x222222)
       }
     })
 
