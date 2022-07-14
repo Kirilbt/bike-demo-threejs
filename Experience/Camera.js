@@ -16,16 +16,16 @@ export default class Camera {
     this.createOrthographicCamera()
     this.setOrbitControls()
 
-    // Grid Helper
-    const size = 20;
-    const divisions = 20;
+    // // Grid Helper
+    // const size = 20;
+    // const divisions = 20;
 
-    const gridHelper = new THREE.GridHelper( size, divisions );
-    this.scene.add(gridHelper)
+    // const gridHelper = new THREE.GridHelper( size, divisions );
+    // this.scene.add(gridHelper)
 
-    // Axes Helper
-    const axesHelper = new THREE.AxesHelper(10);
-    this.scene.add(axesHelper);
+    // // Axes Helper
+    // const axesHelper = new THREE.AxesHelper(10);
+    // this.scene.add(axesHelper);
   }
 
   createPerspectiveCamera() {
@@ -50,8 +50,13 @@ export default class Camera {
       -10,
       10
     )
-    this.orthographicCameraHelper = new THREE.CameraHelper(this.orthographicCamera)
-    this.scene.add(this.orthographicCamera, this.orthographicCameraHelper)
+
+    this.orthographicCamera.position.y = 1.25
+    this.scene.add(this.orthographicCamera)
+
+    // // Orthographic Camera Helper
+    // this.orthographicCameraHelper = new THREE.CameraHelper(this.orthographicCamera)
+    // this.scene.add(this.orthographicCameraHelper)
   }
 
   setOrbitControls() {
@@ -76,10 +81,10 @@ export default class Camera {
     // console.log(this.perspectiveCamera.position);
     this.controls.update()
 
-    // Updating Orthographic Camera Helper
-    this.orthographicCameraHelper.matrixWorldNeedsUpdate = true
-    this.orthographicCameraHelper.update()
-    this.orthographicCameraHelper.position.copy(this.orthographicCamera.position)
-    this.orthographicCameraHelper.position.copy(this.orthographicCamera.rotation)
+    // // Updating Orthographic Camera Helper
+    // this.orthographicCameraHelper.matrixWorldNeedsUpdate = true
+    // this.orthographicCameraHelper.update()
+    // this.orthographicCameraHelper.position.copy(this.orthographicCamera.position)
+    // this.orthographicCameraHelper.position.copy(this.orthographicCamera.rotation)
   }
 }
