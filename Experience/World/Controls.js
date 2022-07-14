@@ -20,6 +20,11 @@ export default class Controls {
     }
 
     this.position = new THREE.Vector3(0, 0, 0)
+    this.lookAtPosition = new THREE.Vector3(0, 0, 0)
+
+    this.directionalVector = new THREE.Vector3(0, 0, 0)
+    this.staticVector = new THREE.Vector3(0, 1, 0)
+    this.crossVector = new THREE.Vector3(0, 0, 0)
 
     this.setPath()
     this.onWheel()
@@ -27,11 +32,10 @@ export default class Controls {
 
   setPath() {
     this.curve = new THREE.CatmullRomCurve3( [
-      new THREE.Vector3( -10, 0, 10 ),
-      new THREE.Vector3( -5, 5, 5 ),
-      new THREE.Vector3( 0, 0, 0 ),
-      new THREE.Vector3( 5, -5, 5 ),
-      new THREE.Vector3( 10, 0, 10 )
+      new THREE.Vector3(-5, 0, 0),
+      new THREE.Vector3(0, 0, -5),
+      new THREE.Vector3(5, 0, 0),
+      new THREE.Vector3(0, 0, 5),
     ], true)
 
     const points = this.curve.getPoints( 50 )
@@ -69,19 +73,19 @@ export default class Controls {
       this.lerp.ease
     )
 
-    // Keep animation going based on wheel direction
-    if(this.back) {
-      this.lerp.target -= 0.001
-    } else {
-      this.lerp.target += 0.001
-    }
-
-    // Clamp values between 0 and 1
-    this.lerp.current = GSAP.utils.clamp(0, 1, this.lerp.current)
-    this.lerp.target = GSAP.utils.clamp(0, 1, this.lerp.target)
-
-    // getPointAt could be understood as % along the curve
-    this.curve.getPointAt(this.lerp.current, this.position)
+    this.curve.getPointAt(this.lerp.current % 1, this.position)
     this.camera.orthographicCamera.position.copy(this.position)
+
+    this.directionalVector.subVectors(
+      this.curve.getPointAt((this.lerp.current % 1) + 0.000001),
+      this.position
+    )
+    this.directionalVector.normalize()
+    this.crossVector.crossVectors(
+      this.directionalVector,
+      this.staticVector
+    )
+    this.crossVector.multiplyScalar(100000)
+    this.camera.orthographicCamera.lookAt(this.crossVector)
   }
 }

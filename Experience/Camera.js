@@ -76,7 +76,7 @@ export default class Camera {
     // console.log(this.perspectiveCamera.position);
     this.controls.update()
 
-    // Updating orthographicCameraHelper
+    // Updating Orthographic Camera Helper
     this.orthographicCameraHelper.matrixWorldNeedsUpdate = true
     this.orthographicCameraHelper.update()
     this.orthographicCameraHelper.position.copy(this.orthographicCamera.position)

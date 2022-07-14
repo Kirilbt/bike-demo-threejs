@@ -60,6 +60,27 @@ export default class Environment {
         .max(5)
         .step(0.001)
 
+        this.debugFolder
+        .add(this.sunLight.rotation, 'x')
+        .name('sunRotationX')
+        .min(- 5)
+        .max(5)
+        .step(0.001)
+
+      this.debugFolder
+        .add(this.sunLight.rotation, 'y')
+        .name('sunRotationY')
+        .min(- 5)
+        .max(5)
+        .step(0.001)
+
+      this.debugFolder
+        .add(this.sunLight.rotation, 'z')
+        .name('sunRotationZ')
+        .min(- 5)
+        .max(5)
+        .step(0.001)
+
       this.debugFolder
         .add(this.ambientLight, 'intensity')
         .name('ambLightIntensity')
