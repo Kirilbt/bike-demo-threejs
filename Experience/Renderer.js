@@ -37,24 +37,24 @@ export default class Renderer {
     this.renderer.setViewport(0, 0, this.sizes.width, this.sizes.height)
     this.renderer.render(this.scene, this.camera.orthographicCamera)
 
-    // Second Screen
-    this.renderer.setScissorTest(true)
-    this.renderer.setViewport(
-      this.sizes.width - this.sizes.width / 3,
-      this.sizes.height - this.sizes.height / 3,
-      this.sizes.width / 3,
-      this.sizes.height / 3
-    )
+    // // Second Screen
+    // this.renderer.setScissorTest(true)
+    // this.renderer.setViewport(
+    //   this.sizes.width - this.sizes.width / 3,
+    //   this.sizes.height - this.sizes.height / 3,
+    //   this.sizes.width / 3,
+    //   this.sizes.height / 3
+    // )
 
-    this.renderer.setScissor(
-      this.sizes.width - this.sizes.width / 3,
-      this.sizes.height - this.sizes.height / 3,
-      this.sizes.width / 3,
-      this.sizes.height / 3
-    )
+    // this.renderer.setScissor(
+    //   this.sizes.width - this.sizes.width / 3,
+    //   this.sizes.height - this.sizes.height / 3,
+    //   this.sizes.width / 3,
+    //   this.sizes.height / 3
+    // )
 
-    this.renderer.render(this.scene, this.camera.perspectiveCamera)
+    // this.renderer.render(this.scene, this.camera.perspectiveCamera)
 
-    this.renderer.setScissorTest(false)
+    // this.renderer.setScissorTest(false)
   }
 }

@@ -1,8 +1,26 @@
+@import url("https://use.typekit.net/rlp6ofa.css");
+
 *  {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
+html, body {
+  color: var(--text-white);
+  font-family: neue-haas-unica, sans-serif;
+  font-weight: 400;
+}
+
+:root {
+  --text-white: #fff;
+  --primary-color: #0044ff;
+  --secondary-color: #ff8000;
+  --dark-color: #161616;
+  --darker-color: #101010;
+}
+
+/* Experience */
 
 .experience {
   position: fixed;
@@ -13,4 +31,154 @@
 .experience-canvas {
   width: 100%;
   height: 100%;
+}
+
+/* Page */
+
+.page {
+  z-index: 99999;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.page-wrapper {
+  position: relative;
+}
+
+/* Hero Section */
+
+.hero {
+  width: 100vw;
+  height: 100vh;
+}
+
+.hero-wrapper {
+  position: relative;
+  height: 100%;
+  width: calc(100% - 10rem);
+  max-width: 100rem;
+  margin: 0 auto;
+}
+
+.hero-main {
+  position: absolute;
+  bottom: 12rem;
+}
+
+.hero-second {
+  position: absolute;
+  top: calc(50% - 8rem);
+  right: 0;
+}
+
+.hero-main-title {
+  font-family: venn-extended,sans-serif;
+  font-weight: 300;
+  font-size: 4rem;
+}
+
+.hero-main-description {
+  font-weight: 300;
+  font-size: 1.6rem;
+}
+
+.hero-second-subheading {
+  font-weight: 300;
+  font-size: 1.6rem;
+}
+
+/* Sections */
+
+.section-margin {
+  height: 187.5rem;
+  width: 100%;
+}
+
+.section {
+  width: 50%;
+  padding: 62.5rem 4%;
+  margin: 0;
+  background-color: var(--darker-color);
+}
+
+.left {
+  margin-right: auto;
+}
+
+.right {
+  margin-left: auto;
+}
+
+.section-intro-wrapper {
+  position: relative;
+  padding: 20% 5%;
+  border-bottom: 1px solid #fff;
+  padding-bottom: 25rem;
+}
+
+.section-detail-wrapper {
+  position: relative;
+  padding: 20% 5%;
+}
+
+.section-heading {
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 1.8;
+  margin-top: 4rem;
+}
+
+.section-text {
+  line-height: 1.9;
+  margin-top: 18px;
+  font-size: 1rem;
+}
+
+/* Section - Decoration */
+
+.section-title {
+  position: relative;
+  color: #ccc;
+}
+
+.section-title-text {
+  display: block;
+  font-size: 2.4rem;
+  text-transform: uppercase;
+  transform-origin: left;
+  transform: skewY(25deg);
+  z-index: 5
+}
+
+.section-title-decoration {
+  position: absolute;
+  display: block;
+  width: 100%;
+  max-width: 16.125rem;
+  height: 3rem;
+  border: 1px solid #fff;
+  transform-origin: left;
+  transform: skewY(-25deg);
+}
+
+.section-title-decoration:first-child {
+  top: 0;
+}
+
+.section-title-decoration:nth-child(2) {
+  top: 6rem;
+}
+
+.section-title-decoration:last-child {
+  top: 6rem;
+  transform: skewY(25deg);
+  background-color: #fff;
+}
+
+.section-number {
+  position: absolute;
+  bottom: 1rem;
+  right: 0;
+  font-size: 1.5rem;
 }
