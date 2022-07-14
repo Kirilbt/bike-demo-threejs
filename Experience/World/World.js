@@ -3,6 +3,7 @@ import Experience from "../Experience.js"
 
 import Environment from './Environment.js'
 import Bike from './Bike.js'
+import Floor from './Floor.js'
 import Controls from './Controls.js'
 
 
@@ -18,6 +19,7 @@ export default class World {
     this.resources.on('ready', () => {
       this.environment = new Environment()
       this.bike = new Bike()
+      this.floor = new Floor()
       this.controls = new Controls()
     })
   }
