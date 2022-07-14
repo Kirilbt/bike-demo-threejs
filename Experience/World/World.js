@@ -3,6 +3,7 @@ import Experience from "../Experience.js"
 
 import Environment from './Environment.js'
 import Bike from './Bike.js'
+import Controls from './Controls.js'
 
 
 export default class World {
@@ -17,6 +18,7 @@ export default class World {
     this.resources.on('ready', () => {
       this.environment = new Environment()
       this.bike = new Bike()
+      this.controls = new Controls()
     })
   }
 
@@ -27,6 +29,10 @@ export default class World {
   update() {
     if(this.bike) {
       this.bike.update()
+    }
+
+    if(this.controls) {
+      this.controls.update()
     }
   }
 }

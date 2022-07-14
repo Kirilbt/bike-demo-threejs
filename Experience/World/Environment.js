@@ -14,10 +14,10 @@ export default class Environment {
     }
 
     // Setup
-    this.setSunlight()
+    this.setLight()
   }
 
-  setSunlight() {
+  setLight() {
     this.sunLight = new THREE.DirectionalLight("#ffffff", 3)
     this.sunLightHelper = new THREE.DirectionalLightHelper(this.sunLight, 5)
     this.sunLight.castShadow = true
@@ -27,9 +27,11 @@ export default class Environment {
     this.sunLight.position.set(3, 7, 3)
     this.scene.add(this.sunLight, this.sunLightHelper)
 
-    // Debug - sunLight
+    this.ambientLight = new THREE.AmbientLight('#ffffff', 1)
+    this.scene.add(this.ambientLight)
+
+    // Debug
     if(this.debug.active) {
-      console.log(this.debugFolder);
       this.debugFolder
         .add(this.sunLight, 'intensity')
         .name('sunLightIntensity')
@@ -57,10 +59,14 @@ export default class Environment {
         .min(- 5)
         .max(5)
         .step(0.001)
-    }
 
-    this.ambientLight = new THREE.AmbientLight('#ffffff', 1)
-    this.scene.add(this.ambientLight)
+      this.debugFolder
+        .add(this.ambientLight, 'intensity')
+        .name('ambLightIntensity')
+        .min(0)
+        .max(10)
+        .step(0.001)
+    }
   }
 
   resize() {

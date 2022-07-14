@@ -13,12 +13,12 @@ export default class Camera {
     this.bike = this.experience.bike
 
     this.createPerspectiveCamera()
-    this.createOrthographicCamera() // Check if it works for the project
+    this.createOrthographicCamera()
     this.setOrbitControls()
 
     // Grid Helper
-    const size = 10;
-    const divisions = 10;
+    const size = 20;
+    const divisions = 20;
 
     const gridHelper = new THREE.GridHelper( size, divisions );
     this.scene.add(gridHelper)
@@ -36,28 +36,28 @@ export default class Camera {
       1000
     )
     this.scene.add(this.perspectiveCamera)
-    this.perspectiveCamera.position.x = 1
-    this.perspectiveCamera.position.y = 2
-    this.perspectiveCamera.position.z = 7
+    this.perspectiveCamera.position.x = 10
+    this.perspectiveCamera.position.y = 6
+    this.perspectiveCamera.position.z = 29
   }
 
   createOrthographicCamera() {
-    this.frustum = 5
     this.orthographicCamera = new THREE.OrthographicCamera(
-      (-this.sizes.aspect * this.sizes.frustum ) / 2,
-      (this.sizes.aspect * this.sizes.frustum ) / 2,
+      (-this.sizes.aspect * this.sizes.frustum) / 2,
+      (this.sizes.aspect * this.sizes.frustum) / 2,
       this.sizes.frustum  / 2,
       -this.sizes.frustum  / 2,
-      -100,
-      100
+      -10,
+      10
     )
-    this.scene.add(this.orthographicCamera)
+    this.orthographicCameraHelper = new THREE.CameraHelper(this.orthographicCamera)
+    this.scene.add(this.orthographicCamera, this.orthographicCameraHelper)
   }
 
   setOrbitControls() {
     this.controls = new OrbitControls(this.perspectiveCamera, this.canvas)
     this.controls.enableDamping = true
-    this.controls.enableZoom = true
+    this.controls.enableZoom = false
   }
 
   resize() {
@@ -73,6 +73,13 @@ export default class Camera {
   }
 
   update() {
+    // console.log(this.perspectiveCamera.position);
     this.controls.update()
+
+    // Updating orthographicCameraHelper
+    this.orthographicCameraHelper.matrixWorldNeedsUpdate = true
+    this.orthographicCameraHelper.update()
+    this.orthographicCameraHelper.position.copy(this.orthographicCamera.position)
+    this.orthographicCameraHelper.position.copy(this.orthographicCamera.rotation)
   }
 }
