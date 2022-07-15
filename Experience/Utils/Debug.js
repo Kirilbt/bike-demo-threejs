@@ -6,7 +6,7 @@ export default class Debug
     this.active = window.location.hash === '#debug'
 
     if(this.active) {
-      this.ui = new dat.GUI()
+      this.ui = new dat.GUI({ container: document.querySelector('.hero-second') })
     }
   }
 }

@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper.js'
 import GSAP from 'gsap'
 import Experience from '../Experience.js'
 
@@ -17,6 +18,7 @@ export default class Bike {
     }
 
     this.setModel()
+    this.setRectAreaLight()
     this.onMouseMove()
   }
 
@@ -30,11 +32,26 @@ export default class Bike {
 
         // Material
         child.material = new THREE.MeshStandardMaterial
-        child.material.color.set(0x222222)
+        child.material.color.set(0xECE5C7)
       }
     })
 
     this.scene.add(this.actualBike)
+    console.log(this.actualBike.position);
+  }
+
+  setRectAreaLight() {
+    const width = 1
+    const height = 1
+    const intensity = 5
+    const rectLight = new THREE.RectAreaLight( 0xffffff, intensity,  width, height )
+    rectLight.position.set( 3, 0.5, 2 )
+    rectLight.rotation.y = Math.PI / 3.5
+    this.actualBike.add( rectLight )
+
+    // Rect Area Light Helper
+    const rectLightHelper = new RectAreaLightHelper( rectLight );
+    rectLight.add( rectLightHelper )
   }
 
   onMouseMove() {

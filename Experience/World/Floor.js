@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import GSAP from 'gsap'
 import Experience from '../Experience.js'
 
-export default class Bike {
+export default class Floor {
   constructor() {
     this.experience = new Experience()
     this.scene = this.experience.scene
@@ -13,7 +13,7 @@ export default class Bike {
   setFloor() {
     this.geometry = new THREE.PlaneGeometry(100, 100)
     this.material = new THREE.MeshStandardMaterial({
-      color: 0x000000,
+      color: 0xFAF5E3,
       side: THREE.BackSide,
     })
     this.plane = new THREE.Mesh(this.geometry, this.material)

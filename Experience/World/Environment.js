@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import GSAP from 'gsap'
 import Experience from '../Experience.js'
 
 export default class Environment {
@@ -11,6 +12,9 @@ export default class Environment {
     // Debug
     if(this.debug.active) {
       this.debugFolder = this.debug.ui.addFolder('environment')
+      this.obj = {
+        colorObj: {r:0 , g: 0, b: 0}
+      }
     }
 
     // Setup
@@ -35,6 +39,14 @@ export default class Environment {
 
     // Debug
     if(this.debug.active) {
+      this.debugFolder
+        .addColor(this.obj, 'colorObj')
+        .name('lightsColor')
+        .onChange(() => {
+          this.sunLight.color.copy(this.obj.colorObj)
+          this.ambientLight.color.copy(this.obj.colorObj)
+        })
+
       this.debugFolder
         .add(this.sunLight, 'intensity')
         .name('sunLightIntensity')
@@ -90,6 +102,45 @@ export default class Environment {
         .min(0)
         .max(10)
         .step(0.001)
+    }
+  }
+
+  switchTheme(theme) {
+    console.log(this.sunLight)
+    if(theme === 'dark') {
+      GSAP.to(this.sunLight.color, {
+        r: 0.17,
+        g: 0.23,
+        b: 0.68
+      })
+      GSAP.to(this.ambientLight.color, {
+        r: 0.17,
+        g: 0.23,
+        b: 0.68
+      })
+      GSAP.to(this.sunLight, {
+        intensity: 1
+      })
+      GSAP.to(this.ambientLight, {
+        intensity: 1
+      })
+    } else {
+      GSAP.to(this.sunLight.color, {
+        r: 255 / 255,
+        g: 255 / 255,
+        b: 255 / 255
+      })
+      GSAP.to(this.ambientLight.color, {
+        r: 255 / 255,
+        g: 255 / 255,
+        b: 255 / 255
+      })
+      GSAP.to(this.sunLight, {
+        intensity: 3
+      })
+      GSAP.to(this.ambientLight, {
+        intensity: 1
+      })
     }
   }
 
