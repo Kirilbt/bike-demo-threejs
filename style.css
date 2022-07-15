@@ -14,8 +14,9 @@ html, body {
 
 :root {
   --text-white: #fff;
-  --primary-color: #0044ff;
+  --primary-color: #ccc;
   --secondary-color: #ff8000;
+  --primary-pink: #f9ddff;
   --dark-color: #161616;
   --darker-color: #101010;
 }
@@ -44,6 +45,57 @@ html, body {
 
 .page-wrapper {
   position: relative;
+}
+
+/* Toggle */
+
+.toggle-bar {
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  top: 3rem;
+  right: 3rem;
+  z-index: 99999;
+}
+
+.sun-wrapper,
+.moon-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  fill: #fff;
+}
+
+.toggle-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  width: 3.5rem;
+  height: 2rem;
+  background-color: var(--primary-color);
+  border-radius: 9999px;
+  margin: 0 16px;
+  border: none;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.toggle-circle {
+  position: absolute;
+  left: 0.5rem;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: var(--dark-color);
+  transition: all .2s ease-in-out;
+}
+
+.toggle-button:hover .toggle-circle {
+  transform: scale(0.8);
 }
 
 /* Hero Section */
