@@ -185,18 +185,50 @@ svg {
 }
 
 .section {
+  position: relative;
   width: 50%;
   padding: 62.5rem 4%;
   margin: 0;
   background-color: var(--color-background);
+  overflow: hidden;
 }
 
 .left {
   margin-right: auto;
+  border-top-right-radius: 43.75rem 43.75rem;
 }
 
 .right {
   margin-left: auto;
+  border-top-left-radius: 43.75rem 43.75rem;
+}
+
+/* Sections - Progress Bars */
+
+.progress-wrapper {
+  height: 0;
+  width: 0.8rem;
+  z-index: 9999;
+}
+
+.progress-bar-wrapper-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.progress-bar-wrapper-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.progress-bar {
+  height: 100vh;
+  width: 100%;
+  background-color: var(--color-primary);
+  transform-origin: top center;
+  transform: scaleY(1);
 }
 
 .section-intro-wrapper {
@@ -307,5 +339,10 @@ svg {
 @media (max-width: 968px) {
   .section {
     width: 100%;
+  }
+
+  .progress-bar-wrapper-left {
+    right: 0;
+    left: auto;
   }
 }
