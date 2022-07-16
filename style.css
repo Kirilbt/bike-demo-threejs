@@ -275,3 +275,37 @@ svg {
   font-size: 1.5rem;
   color: var(--color-text);
 }
+
+/* Section - Color Overriddes */
+
+.secondary-text {
+  color: var(--color-secondary);
+}
+
+.secondary-border {
+  border-color: var(--color-secondary);
+}
+
+.secondary-background {
+  background-color: var(--color-secondary);
+}
+
+.tertiary-text {
+  color: var(--color-tertiary);
+}
+
+.tertiary-border {
+  border-color: var(--color-tertiary);
+}
+
+.tertiary-background {
+  background-color: var(--color-tertiary);
+}
+
+/* Media Queries */
+
+@media (max-width: 968px) {
+  .section {
+    width: 100%;
+  }
+}
