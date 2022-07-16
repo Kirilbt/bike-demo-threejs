@@ -11,29 +11,161 @@ export default class Controls {
     this.sizes = this.experience.sizes
     this.time = this.experience.time
     this.camera = this.experience.camera
-    this.bike = this.experience.world.bike.actualBike
+    this.actualBike = this.experience.world.bike.actualBike
+
+    this.actualBike.children.forEach(child => {
+      if(child.type === 'RectAreaLight') {
+        this.rectLight = child
+      }
+    })
 
     GSAP.registerPlugin(ScrollTrigger)
 
-    this.setPath()
+    this.setScrollTrigger()
   }
 
-  setPath() {
-    console.log(this.bike);
-    this.timeline = new GSAP.timeline()
-    this.timeline.to(this.bike.position, {
-      x: () => {
-        return this.sizes.width * 0.0017 // to update something in GSAP on resize, we need to provide a functional value
+  setScrollTrigger() {
+    ScrollTrigger.matchMedia({
+      // Desktop
+      "(min-width: 969px)": () => {
+        console.log('fired desktop');
+
+        // Resets
+        this.actualBike.scale.set(1, 1, 1)
+        this.rectLight.width = 1
+        this.rectLight.height = 1
+
+        // First Section
+        this.firstMoveTimeline = new GSAP.timeline({
+          scrollTrigger: {
+            trigger: '.first-move',
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 0.6,
+            invalidateOnRefresh: true
+          }
+        })
+        this.firstMoveTimeline.to(this.actualBike.position, {
+          x: () => {
+            return this.sizes.width * 0.0014
+          }
+        })
+
+        // Second Section
+        this.secondMoveTimeline = new GSAP.timeline({
+          scrollTrigger: {
+            trigger: '.second-move',
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 0.6,
+            invalidateOnRefresh: true
+          }
+        })
+        .to(this.actualBike.position, {
+          x: () => {
+            return 0.5
+          },
+          z: () => {
+            return this.sizes.height * 0.0032
+          }
+        }, 'same-position')
+        .to(this.actualBike.scale, {
+          x: 2,
+          y: 2,
+          z: 2
+        }, 'same-position')
+        .to(this.rectLight, {
+          width: 1 * 2, // !!! same increased values as actualBike
+          height: 1 * 2, // !!! same increased values as actualBike
+        }, 'same-position')
+
+        // Third Section
+        this.thirdMoveTimeline = new GSAP.timeline({
+          scrollTrigger: {
+            trigger: '.third-move',
+            start: 'top top',
+            end: 'bottom bottom',
+            markers: true,
+            scrub: 0.6,
+            invalidateOnRefresh: true
+          }
+        })
+        .to(this.camera.orthographicCamera.position, {
+          x: -4.1,
+          y: 1.5,
+        })
       },
-      scrollTrigger: {
-        trigger: '.first-move',
-        markers: true,
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: 0.6,
-        invalidateOnRefresh: true
-      }
-    })
+
+      // Mobile
+      "(max-width: 968px)": () => {
+        console.log('fired mobile')
+
+        // Resets
+        this.actualBike.scale.set(0.5, 0.5, 0.5)
+        this.actualBike.position.set(0, 0, 0)
+        this.rectLight.width = 1 * 0.5 // !!! same increased values as actualBike
+        this.rectLight.height = 1 * 0.5 // !!! same increased values as actualBike
+
+        // First Section - Mobile
+        this.firstMoveTimeline = new GSAP.timeline({
+          scrollTrigger: {
+            trigger: '.first-move',
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 0.6,
+            invalidateOnRefresh: true
+          }
+        })
+        .to(this.actualBike.scale, {
+          x: 0.75,
+          y: 0.75,
+          z: 0.75
+        })
+
+        // Second Section - Mobile
+        this.secondMoveTimeline = new GSAP.timeline({
+          scrollTrigger: {
+            trigger: '.second-move',
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 0.6,
+            invalidateOnRefresh: true
+          }
+        })
+        .to(this.actualBike.scale, {
+          x: 1,
+          y: 1,
+          z: 1
+        }, 'same')
+        .to(this.rectLight, {
+          width: 1,
+          height: 1
+        }, 'same')
+        .to(this.actualBike.position, {
+          x: 1.4
+        }, 'same')
+
+        // Third Section - Mobile
+        this.thirdMoveTimeline = new GSAP.timeline({
+          scrollTrigger: {
+            trigger: '.third-move',
+            start: 'top top',
+            end: 'bottom bottom',
+            markers: true,
+            scrub: 0.6,
+            invalidateOnRefresh: true
+          }
+        })
+        .to(this.camera.orthographicCamera.position, {
+          x: 3,
+          y: 1.5,
+        })
+      },
+
+      // // all
+      // "all": () => {}
+
+    });
   }
 
   resize() {}

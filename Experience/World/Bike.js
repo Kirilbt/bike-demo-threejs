@@ -23,7 +23,6 @@ export default class Bike {
   }
 
   setModel() {
-
     this.actualBike.traverse((child) => {
       if(child instanceof THREE.Mesh) {
         // Shadows
@@ -37,7 +36,6 @@ export default class Bike {
     })
 
     this.scene.add(this.actualBike)
-    console.log(this.actualBike.position);
   }
 
   setRectAreaLight() {
