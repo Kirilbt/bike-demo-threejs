@@ -6,6 +6,8 @@ import Experience from '../Experience.js'
 
 export default class Controls {
   constructor() {
+    GSAP.registerPlugin(ScrollTrigger)
+
     this.experience = new Experience()
     this.scene = this.experience.scene
     this.resources = this.experience.resources
@@ -20,7 +22,9 @@ export default class Controls {
       }
     })
 
-    GSAP.registerPlugin(ScrollTrigger)
+    this.circleFirst = this.experience.world.floor.circleFirst
+    this.circleSecond = this.experience.world.floor.circleSecond
+    this.circleThird = this.experience.world.floor.circleThird
 
     this.setSmoothScroll()
     this.setScrollTrigger()
@@ -265,6 +269,56 @@ export default class Controls {
               pinSpacing: false
             }
           })
+        })
+
+        // Circle Animations
+        // First Section
+        this.firstMoveTimeline = new GSAP.timeline({
+          scrollTrigger: {
+            trigger: '.first-move',
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 0.6,
+            invalidateOnRefresh: true
+          }
+        })
+        .to(this.circleFirst.scale, {
+          x: 3,
+          y: 3,
+          z: 3
+        })
+
+        // Second Section
+        this.secondMoveTimeline = new GSAP.timeline({
+          scrollTrigger: {
+            trigger: '.second-move',
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 0.6,
+            invalidateOnRefresh: true
+          }
+        })
+        .to(this.circleSecond.scale, {
+          x: 3,
+          y: 3,
+          z: 3
+        })
+
+        // Third Section
+        this.thirdMoveTimeline = new GSAP.timeline({
+          scrollTrigger: {
+            trigger: '.third-move',
+            start: 'top top',
+            end: 'bottom bottom',
+            markers: true,
+            scrub: 0.6,
+            invalidateOnRefresh: true
+          }
+        })
+        .to(this.circleThird.scale, {
+          x: 3,
+          y: 3,
+          z: 3
         })
       }
 

@@ -19,8 +19,8 @@ export default class World {
 
     this.resources.on('ready', () => {
       this.environment = new Environment()
-      this.bike = new Bike()
       this.floor = new Floor()
+      this.bike = new Bike()
       this.controls = new Controls()
     })
 
