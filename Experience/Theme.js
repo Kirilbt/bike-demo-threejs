@@ -1,4 +1,4 @@
-import EventEmitter from "./Utils/EventEmitter"
+import { EventEmitter } from 'events'
 
 export default class Theme extends EventEmitter {
   constructor() {
@@ -19,7 +19,7 @@ export default class Theme extends EventEmitter {
       document.body.classList.toggle('dark-theme')
       document.body.classList.toggle('light-theme')
 
-      this.trigger('switch', this.theme)
+      this.emit('switch', this.theme)
     })
   }
 }

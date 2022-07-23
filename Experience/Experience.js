@@ -8,6 +8,7 @@ import assets from './Utils/assets.js'
 
 import Camera from './Camera.js'
 import Renderer from './Renderer.js'
+import Preloader from './Preloader.js'
 import Theme from './Theme.js'
 
 import World from './World/World.js'
@@ -21,7 +22,7 @@ export default class Experience {
     Experience.instance = this
     this.canvas = canvas
     this.scene = new THREE.Scene()
-    this.scene.background = new THREE.Color( 0xFAF5E3 );
+    this.scene.background = new THREE.Color(0xFAF5E3)
     this.debug = new Debug()
     this.sizes = new Sizes()
     this.time = new Time()
@@ -30,6 +31,7 @@ export default class Experience {
     this.resources = new Resources(assets)
     this.theme = new Theme()
     this.world = new World()
+    this.preloader = new Preloader()
 
     this.sizes.on('resize', () => {
       this.resize()

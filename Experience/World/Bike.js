@@ -10,6 +10,7 @@ export default class Bike {
     this.resources = this.experience.resources
     this.bike = this.resources.items.bike
     this.actualBike = this.bike.scene
+    this.bikeChildren = {}
 
     this.lerp = {
       current: 0,
@@ -33,6 +34,16 @@ export default class Bike {
         child.material = new THREE.MeshStandardMaterial
         child.material.color.set(0xECE5C7)
       }
+
+      // console.log(child.name);
+      // child.scale.set(0, 0, 0)
+
+      if(child.name === 'Preloader') {
+        // child.scale.set(1, 1, 1)
+        child.rotation.y = Math.PI / 4
+      }
+
+      this.bikeChildren[child.name.toLowerCase()] = child
     })
 
     this.scene.add(this.actualBike)
@@ -46,6 +57,8 @@ export default class Bike {
     rectLight.position.set( 3, 0.5, 2 )
     rectLight.rotation.y = Math.PI / 3.5
     this.actualBike.add( rectLight )
+
+    this.bikeChildren['rectLight'] = rectLight
 
     // Rect Area Light Helper
     const rectLightHelper = new RectAreaLightHelper( rectLight );

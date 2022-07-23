@@ -51,7 +51,7 @@ export default class Camera {
       10
     )
 
-    this.orthographicCamera.position.y = 1.25
+    this.orthographicCamera.position.y = 1 // 1.25 Default Scene Vie
     this.orthographicCamera.rotation.x = -Math.PI / 24
     this.scene.add(this.orthographicCamera)
 

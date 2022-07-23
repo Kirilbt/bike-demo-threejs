@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js"
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js"
-import EventEmitter from "./EventEmitter.js"
+import { EventEmitter } from 'events'
 import Experience from "../Experience.js"
 
 export default class Resources extends EventEmitter {
@@ -66,7 +66,7 @@ export default class Resources extends EventEmitter {
     this.loaded++
 
     if (this.loaded === this.queue) {
-      this.trigger('ready')
+      this.emit('ready')
     }
   }
 }
