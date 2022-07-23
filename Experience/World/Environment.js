@@ -143,11 +143,7 @@ export default class Environment {
     }
   }
 
-  resize() {
+  resize() {}
 
-  }
-
-  update() {
-
-  }
+  update() {}
 }

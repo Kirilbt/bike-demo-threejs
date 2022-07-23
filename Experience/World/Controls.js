@@ -6,8 +6,6 @@ import Experience from '../Experience.js'
 
 export default class Controls {
   constructor() {
-    GSAP.registerPlugin(ScrollTrigger)
-
     this.experience = new Experience()
     this.scene = this.experience.scene
     this.resources = this.experience.resources
@@ -25,6 +23,10 @@ export default class Controls {
     this.circleFirst = this.experience.world.floor.circleFirst
     this.circleSecond = this.experience.world.floor.circleSecond
     this.circleThird = this.experience.world.floor.circleThird
+
+    GSAP.registerPlugin(ScrollTrigger)
+
+    document.querySelector('.page').style.overflow = 'visible'
 
     this.setSmoothScroll()
     this.setScrollTrigger()

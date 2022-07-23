@@ -2,7 +2,6 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 import Experience from './Experience.js'
-import Bike from './World/Bike.js'
 
 export default class Camera {
   constructor() {
@@ -10,7 +9,6 @@ export default class Camera {
     this.sizes = this.experience.sizes
     this.scene = this.experience.scene
     this.canvas = this.experience.canvas
-    this.bike = this.experience.bike
 
     this.createPerspectiveCamera()
     this.createOrthographicCamera()
@@ -53,6 +51,7 @@ export default class Camera {
 
     this.orthographicCamera.position.y = 1 // 1.25 Default Scene Vie
     this.orthographicCamera.rotation.x = -Math.PI / 24
+
     this.scene.add(this.orthographicCamera)
 
     // // Orthographic Camera Helper
@@ -72,10 +71,11 @@ export default class Camera {
     this.perspectiveCamera.updateProjectionMatrix()
 
     // Updating Orthographic Camera on Resize
-    this.orthographicCamera.left = (-this.sizes.aspect * this.sizes.frustrum) / 2
-    this.orthographicCamera.right = (this.sizes.aspect * this.sizes.frustrum) / 2
-    this.orthographicCamera.top = this.sizes.frustrum / 2
-    this.orthographicCamera.bottom = -this.sizes.frustrum / 2
+    this.orthographicCamera.left = (-this.sizes.aspect * this.sizes.frustum) / 2
+    this.orthographicCamera.right = (this.sizes.aspect * this.sizes.frustum) / 2
+    this.orthographicCamera.top = this.sizes.frustum / 2
+    this.orthographicCamera.bottom = -this.sizes.frustum / 2
+    this.orthographicCamera.updateProjectionMatrix()
   }
 
   update() {
