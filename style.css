@@ -147,6 +147,7 @@ svg {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  color: var(--color-text)
 }
 
 .arrow-svg-wrapper {
@@ -438,5 +439,29 @@ svg {
   .progress-bar-wrapper-left {
     right: 0;
     left: auto;
+  }
+
+  .hero-main {
+    bottom: 8.5rem;
+  }
+
+  .hero-second {
+    top: 10rem;
+  }
+
+  .hero-wrapper {
+    width: calc(100% - 4rem);
+  }
+
+  .hero-main-title {
+    font-size: 2rem;
+  }
+
+  .hero-main-description {
+    font-size: 1.2rem;
+  }
+
+  .hero-second-subheading {
+    font-size: 1.2rem;
   }
 }
