@@ -35,10 +35,11 @@ export default class Bike {
         child.material.color.set(0xECE5C7)
       }
 
-      // console.log(child.name);
+      // console.log(child.name)
       // child.scale.set(0, 0, 0)
 
       if(child.name === 'Preloader') {
+        // console.log(child);
         // child.scale.set(1, 1, 1)
         child.rotation.y = Math.PI / 4
       }

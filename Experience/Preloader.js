@@ -1,6 +1,8 @@
 import GSAP from 'gsap'
 
 import { EventEmitter } from 'events'
+import convert from './Utils/convertDivsToSpans'
+
 import Experience from "./Experience"
 
 export default class Preloader extends EventEmitter {
@@ -25,6 +27,11 @@ export default class Preloader extends EventEmitter {
   }
 
   setAssets() {
+    convert(document.querySelector('.intro-text'))
+    convert(document.querySelector('.hero-main-title'))
+    convert(document.querySelector('.hero-main-description'))
+    convert(document.querySelector('.hero-second-subheading'))
+    convert(document.querySelector('.second-sub'))
     this.bike = this.experience.world.bike.actualBike
     this.bikeChildren = this.experience.world.bike.bikeChildren
     console.log(this.bikeChildren);
@@ -33,6 +40,13 @@ export default class Preloader extends EventEmitter {
   firstIntro() {
     return new Promise((resolve) => {
       this.timeline = new GSAP.timeline()
+      this.timeline.to('.preloader', {
+        opacity: 0,
+        delay: 1,
+        onComplete: () => {
+          document.querySelector('.preloader').classList.add('hidden')
+        }
+      })
 
       if (this.device === 'desktop') {
         this.timeline.to(this.bikeChildren.preloader.scale, {
@@ -59,10 +73,23 @@ export default class Preloader extends EventEmitter {
         .to(this.bike.position, {
           z: -1,
           ease: 'power1.out',
-          duration: 0.7,
-          onComplete: resolve
+          duration: 0.7
         })
       }
+
+      this.timeline.to('.intro-text .animatethis', {
+        yPercent: -100,
+        stagger: 0.04,
+        ease: 'back.out(1.5)',
+        onComplete: resolve
+      })
+      .to('.arrow-svg-wrapper', {
+        opacity: 1
+      }, 'fadein')
+      .to('.toggle-bar', {
+        opacity: 1,
+        onComplete: resolve
+      }, 'fadein')
     })
   }
 
@@ -70,7 +97,15 @@ export default class Preloader extends EventEmitter {
     return new Promise((resolve) => {
       this.secondTimeline = new GSAP.timeline()
 
-      this.secondTimeline.to(this.bike.position, {
+      this.secondTimeline.to('.intro-text .animatethis', {
+        yPercent: 100,
+        stagger: 0.04,
+        ease: 'back.in(1.5)'
+      }, 'fadeout')
+      .to('.arrow-svg-wrapper', {
+        opacity: 0
+      }, 'fadeout')
+      .to(this.bike.position, {
         x: 0,
         y: 0,
         z: 0,
@@ -101,6 +136,30 @@ export default class Preloader extends EventEmitter {
         x: 0,
         y: 0,
         z: 0,
+        duration: 1
+      }, 'introtext')
+      .to('.hero-main-title .animatethis', {
+        yPercent: -100,
+        stagger: 0.04,
+        ease: 'back.out(1.5)'
+      }, 'introtext')
+      .to('.hero-main-description .animatethis', {
+        yPercent: -100,
+        stagger: 0.04,
+        ease: 'back.out(1.5)'
+      }, 'introtext')
+      .to('.first-sub .animatethis', {
+        yPercent: -100,
+        stagger: 0.04,
+        ease: 'back.out(1.5)'
+      }, 'introtext')
+      .to('.second-sub .animatethis', {
+        yPercent: -100,
+        stagger: 0.04,
+        ease: 'back.out(1.5)'
+      }, 'introtext')
+      .to('.arrow-svg-wrapper', {
+        opacity: 1,
         onComplete: resolve
       })
     })
