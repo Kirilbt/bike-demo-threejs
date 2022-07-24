@@ -1,5 +1,10 @@
 @import url("https://use.typekit.net/rlp6ofa.css");
 
+@font-face {
+  font-family: FormulaCondensed-Regular;
+  src: url('/fonts/FormulaCondensed-Regular.otf');
+}
+
 *  {
   margin: 0;
   padding: 0;
@@ -23,22 +28,22 @@ svg {
 :root {
   /* Light Theme Variables */
   --color-text-light: #222222;
-  --color-background-light: #FAF5E3;
-  --color-primary-light: #e5a1aa;
-  --color-secondary-light: #7AD0AC;
-  --color-tertiary-light: #8395CD;
+  --color-background-light: #fff;
+  --color-primary-light: #d7d8d9;
+  --color-secondary-light: #d7d8d9;
+  --color-tertiary-light: #d7d8d9;
 
   /* Dark Theme Variables */
-  --color-text-dark: #FAF5E3;
-  --color-background-dark: #8395CD;
+  --color-text-dark: #d7d8d9;
+  --color-background-dark: #121212;
 }
 
 .light-theme {
   --color-text: var(--color-text-light);
   --color-background: var(--color-background-light);
-  --color-primary: var(--color-primary-light);
-  --color-secondary: var(--color-secondary-light);
-  --color-tertiary: var(--color-tertiary-light);
+  --color-primary: var(--color-text-light);
+  --color-secondary: var(--color-text-light);
+  --color-tertiary: var(--color-text-light);
 }
 
 .dark-theme {
@@ -69,7 +74,7 @@ svg {
 /* Preloader */
 
 .preloader {
-  background-color: var(--color-background-light);
+  background-color: var(--color-background);
   width: 100%;
   height: 100vh;
   opacity: 1;
@@ -147,6 +152,8 @@ svg {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  font-family: FormulaCondensed-Regular, sans-serif;
+  font-size: 2rem;
   color: var(--color-text)
 }
 
@@ -254,9 +261,9 @@ svg {
 }
 
 .hero-main-title {
-  font-family: venn-extended,sans-serif;
-  font-weight: 300;
-  font-size: 4rem;
+  font-family: FormulaCondensed-Regular, sans-serif;
+  font-weight: 200;
+  font-size: 8rem;
   color: var(--color-text);
 }
 
@@ -285,6 +292,7 @@ svg {
   padding: 62.5rem 4%;
   margin: 0;
   background-color: var(--color-background);
+  /* backdrop-filter: blur(10px); */
   overflow: hidden;
 }
 
@@ -432,6 +440,12 @@ svg {
 /* Media Queries */
 
 @media (max-width: 968px) {
+  .intro-text {
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+  }
+
   .section {
     width: 100%;
   }

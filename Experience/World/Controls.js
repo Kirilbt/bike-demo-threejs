@@ -312,7 +312,7 @@ export default class Controls {
             trigger: '.third-move',
             start: 'top top',
             end: 'bottom bottom',
-            markers: true,
+            // markers: true,
             scrub: 0.6,
             invalidateOnRefresh: true
           }

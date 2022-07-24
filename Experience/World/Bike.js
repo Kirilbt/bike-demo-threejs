@@ -32,7 +32,7 @@ export default class Bike {
 
         // Material
         child.material = new THREE.MeshStandardMaterial
-        child.material.color.set(0xECE5C7)
+        child.material.color.set(0xd7d8d9)
       }
 
       // console.log(child.name)
@@ -54,16 +54,29 @@ export default class Bike {
     const width = 1
     const height = 1
     const intensity = 5
-    const rectLight = new THREE.RectAreaLight( 0xffffff, intensity,  width, height )
-    rectLight.position.set( 3, 0.5, 2 )
-    rectLight.rotation.y = Math.PI / 3.5
-    this.actualBike.add( rectLight )
+    this.rectLight = new THREE.RectAreaLight( 0xffffff, intensity,  width, height )
+    this.rectLight.position.set( 3, 1, 2 )
+    this.rectLight.rotation.y = Math.PI / 3.5
+    this.rectLight.rotation.z = Math.PI / 3.5
+    this.actualBike.add( this.rectLight )
 
-    this.bikeChildren['rectLight'] = rectLight
+    this.bikeChildren['rectLight'] = this.rectLight
 
-    // Rect Area Light Helper
-    const rectLightHelper = new RectAreaLightHelper( rectLight );
-    rectLight.add( rectLightHelper )
+    // // Rect Area Light Helper
+    // const rectLightHelper = new RectAreaLightHelper( rectLight );
+    // rectLight.add( rectLightHelper )
+  }
+
+  switchTheme(theme) {
+    if(theme === 'dark') {
+      GSAP.to(this.rectLight, {
+        intensity: 1
+      })
+    } else {
+      GSAP.to(this.rectLight, {
+        intensity: 5
+      })
+    }
   }
 
   onMouseMove() {
@@ -73,9 +86,7 @@ export default class Bike {
     })
   }
 
-  resize() {
-
-  }
+  resize() {}
 
   update() {
     this.lerp.current = GSAP.utils.interpolate(

@@ -26,9 +26,9 @@ export default class Floor {
 
   setCircles() {
     const geometry = new THREE.CircleGeometry( 5, 64 )
-    const material = new THREE.MeshStandardMaterial( { color: 0xe5a1aa } )
-    const material2 = new THREE.MeshStandardMaterial( { color: 0x7AD0AC } )
-    const material3 = new THREE.MeshStandardMaterial( { color: 0x8395CD } )
+    const material = new THREE.MeshStandardMaterial( { color: 0xFAF5E3 } )
+    const material2 = new THREE.MeshStandardMaterial( { color: 0xFAF5E3 } )
+    const material3 = new THREE.MeshStandardMaterial( { color: 0xFAF5E3 } )
     this.circleFirst = new THREE.Mesh( geometry, material )
     this.circleSecond = new THREE.Mesh( geometry, material2 )
     this.circleThird = new THREE.Mesh( geometry, material3 )
@@ -54,11 +54,7 @@ export default class Floor {
     this.scene.add(this.circleThird)
   }
 
-  resize() {
+  resize() {}
 
-  }
-
-  update() {
-
-  }
+  update() {}
 }

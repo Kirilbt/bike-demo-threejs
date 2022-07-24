@@ -18,7 +18,13 @@ export default class Environment {
     }
 
     // Setup
+    this.setBackground()
     this.setLight()
+  }
+
+  setBackground() {
+    this.scene.background = new THREE.Color(this.bgColor)
+    this.scene.fog = new THREE.Fog(this.bgColor, 1, 11)
   }
 
   setLight() {
@@ -107,32 +113,52 @@ export default class Environment {
 
   switchTheme(theme) {
     if(theme === 'dark') {
+      GSAP.to(this.scene.background, {
+        r: 34 / 255,
+        g: 34 / 255,
+        b: 34 / 255
+      })
+      GSAP.to(this.scene.fog.color, {
+        r: 34 / 255,
+        g: 34 / 255,
+        b: 34 / 255
+      })
       GSAP.to(this.sunLight.color, {
-        r: 0.17,
-        g: 0.23,
-        b: 0.68
+        r: 34 / 255,
+        g: 34 / 255,
+        b: 34 / 255
       })
       GSAP.to(this.ambientLight.color, {
-        r: 0.17,
-        g: 0.23,
-        b: 0.68
+        r: 34 / 255,
+        g: 34 / 255,
+        b: 34 / 255
       })
       GSAP.to(this.sunLight, {
-        intensity: 1
+        intensity: 0.2
       })
       GSAP.to(this.ambientLight, {
-        intensity: 1
+        intensity: 0.2
       })
     } else {
+      GSAP.to(this.scene.background, {
+        r: 215 / 255,
+        g: 216 / 255,
+        b: 217 / 255
+      })
+      GSAP.to(this.scene.fog.color, {
+        r: 215 / 255,
+        g: 216 / 255,
+        b: 217 / 255
+      })
       GSAP.to(this.sunLight.color, {
-        r: 255 / 255,
-        g: 255 / 255,
-        b: 255 / 255
+        r: 215 / 255,
+        g: 216 / 255,
+        b: 217 / 255
       })
       GSAP.to(this.ambientLight.color, {
-        r: 255 / 255,
-        g: 255 / 255,
-        b: 255 / 255
+        r: 215 / 255,
+        g: 216 / 255,
+        b: 217 / 255
       })
       GSAP.to(this.sunLight, {
         intensity: 3

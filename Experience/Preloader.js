@@ -141,22 +141,22 @@ export default class Preloader extends EventEmitter {
       }, 'introtext')
       .to('.hero-main-title .animatethis', {
         yPercent: 0,
-        stagger: 0.04,
+        stagger: 0.02,
         ease: 'back.out(1.5)'
       }, 'introtext')
       .to('.hero-main-description .animatethis', {
         yPercent: 0,
-        stagger: 0.04,
+        stagger: 0.02,
         ease: 'back.out(1.5)'
       }, 'introtext')
       .to('.first-sub .animatethis', {
         yPercent: 0,
-        stagger: 0.04,
+        stagger: 0.02,
         ease: 'back.out(1.5)'
       }, 'introtext')
       .to('.second-sub .animatethis', {
         yPercent: 0,
-        stagger: 0.04,
+        stagger: 0.02,
         ease: 'back.out(1.5)'
       }, 'introtext')
       .to('.arrow-svg-wrapper', {
