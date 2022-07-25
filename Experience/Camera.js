@@ -9,10 +9,12 @@ export default class Camera {
     this.sizes = this.experience.sizes
     this.scene = this.experience.scene
     this.canvas = this.experience.canvas
+    this.debug = this.experience.debug
 
-    this.createPerspectiveCamera()
-    this.createOrthographicCamera()
-    this.setOrbitControls()
+    // Debug
+    if(this.debug.active) {
+      this.debugFolder = this.debug.ui.addFolder('camera')
+    }
 
     // // Grid Helper
     // const size = 20;
@@ -24,6 +26,11 @@ export default class Camera {
     // // Axes Helper
     // const axesHelper = new THREE.AxesHelper(10);
     // this.scene.add(axesHelper);
+
+    // Setup
+    this.createPerspectiveCamera()
+    this.createOrthographicCamera()
+    this.setOrbitControls()
   }
 
   createPerspectiveCamera() {
@@ -34,9 +41,54 @@ export default class Camera {
       1000
     )
     this.scene.add(this.perspectiveCamera)
-    this.perspectiveCamera.position.x = 10
-    this.perspectiveCamera.position.y = 6
-    this.perspectiveCamera.position.z = 29
+    this.perspectiveCamera.position.x = 1
+    this.perspectiveCamera.position.y = 0.5
+    this.perspectiveCamera.position.z = 5
+    this.perspectiveCamera.rotation.y = 90 * Math.PI / 180
+
+    // Perspective Camera Helper
+    this.perspectiveCameraHelper = new THREE.CameraHelper(this.perspectiveCamera)
+    this.scene.add(this.perspectiveCameraHelper)
+    console.log(this.perspectiveCamera.rotation);
+
+    // Debug
+    if(this.debug.active) {
+      this.debugFolder
+        .add(this.perspectiveCamera.position, 'x')
+        .name('camPosX')
+        .min(-30)
+        .max(30)
+        .step(0.001)
+
+      this.debugFolder
+        .add(this.perspectiveCamera.position, 'y')
+        .name('camPosY')
+        .min(-30)
+        .max(30)
+        .step(0.001)
+
+      this.debugFolder
+        .add(this.perspectiveCamera.position, 'z')
+        .name('camPosZ')
+        .min(-30)
+        .max(30)
+        .step(0.001)
+
+      this.debugFolder
+        .add(this.perspectiveCamera.rotation, 'x', Math.PI * 2)
+        .name('camRotX')
+        .min(-Math.PI * 2)
+        .max(Math.PI * 2)
+        .step(0.001)
+
+      this.debugFolder
+        .add(this.perspectiveCamera.rotation, 'y', Math.PI * 2)
+        .name('camRotY')
+
+      this.debugFolder
+        .add(this.perspectiveCamera.rotation, 'z', Math.PI * 2)
+        .name('camRotZ')
+    }
   }
 
   createOrthographicCamera() {
@@ -49,7 +101,7 @@ export default class Camera {
       10
     )
 
-    this.orthographicCamera.position.y = 1 // 1.25 Default Scene Vie
+    this.orthographicCamera.position.y = 1.25
     this.orthographicCamera.rotation.x = -Math.PI / 24
 
     this.scene.add(this.orthographicCamera)

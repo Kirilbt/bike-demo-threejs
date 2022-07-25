@@ -95,11 +95,9 @@ export default class Controls {
             scrub: 0.6,
             invalidateOnRefresh: true
           }
-        })
-        this.firstMoveTimeline.to(this.actualBike.position, {
-          x: () => {
-            return this.sizes.width * 0.0014
-          }
+        }).to(this.camera.orthographicCamera.position, {
+          x: -2.1,
+          y: 1.5,
         })
 
         // Second Section
@@ -136,7 +134,7 @@ export default class Controls {
             trigger: '.third-move',
             start: 'top top',
             end: 'bottom bottom',
-            markers: true,
+            // markers: true,
             scrub: 0.6,
             invalidateOnRefresh: true
           }
@@ -202,7 +200,7 @@ export default class Controls {
             trigger: '.third-move',
             start: 'top top',
             end: 'bottom bottom',
-            markers: true,
+            // markers: true,
             scrub: 0.6,
             invalidateOnRefresh: true
           }
