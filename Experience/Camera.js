@@ -9,6 +9,7 @@ export default class Camera {
     this.sizes = this.experience.sizes
     this.scene = this.experience.scene
     this.canvas = this.experience.canvas
+
     this.debug = this.experience.debug
 
     // Debug
@@ -29,7 +30,7 @@ export default class Camera {
 
     // Setup
     this.createPerspectiveCamera()
-    this.createOrthographicCamera()
+    // this.createOrthographicCamera()
     this.setOrbitControls()
   }
 
@@ -44,12 +45,11 @@ export default class Camera {
     this.perspectiveCamera.position.x = 1
     this.perspectiveCamera.position.y = 0.5
     this.perspectiveCamera.position.z = 5
-    this.perspectiveCamera.rotation.y = 90 * Math.PI / 180
+    this.perspectiveCamera.rotation.set(30, 30, 30)
 
     // Perspective Camera Helper
     this.perspectiveCameraHelper = new THREE.CameraHelper(this.perspectiveCamera)
     this.scene.add(this.perspectiveCameraHelper)
-    console.log(this.perspectiveCamera.rotation);
 
     // Debug
     if(this.debug.active) {
@@ -91,25 +91,25 @@ export default class Camera {
     }
   }
 
-  createOrthographicCamera() {
-    this.orthographicCamera = new THREE.OrthographicCamera(
-      (-this.sizes.aspect * this.sizes.frustum) / 2,
-      (this.sizes.aspect * this.sizes.frustum) / 2,
-      this.sizes.frustum  / 2,
-      -this.sizes.frustum  / 2,
-      -10,
-      10
-    )
+  // createOrthographicCamera() {
+  //   this.orthographicCamera = new THREE.OrthographicCamera(
+  //     (-this.sizes.aspect * this.sizes.frustum) / 2,
+  //     (this.sizes.aspect * this.sizes.frustum) / 2,
+  //     this.sizes.frustum  / 2,
+  //     -this.sizes.frustum  / 2,
+  //     -10,
+  //     10
+  //   )
 
-    this.orthographicCamera.position.y = 1.25
-    this.orthographicCamera.rotation.x = -Math.PI / 24
+  //   this.orthographicCamera.position.y = 1.25
+  //   this.orthographicCamera.rotation.x = -Math.PI / 24
 
-    this.scene.add(this.orthographicCamera)
+  //   this.scene.add(this.orthographicCamera)
 
-    // // Orthographic Camera Helper
-    // this.orthographicCameraHelper = new THREE.CameraHelper(this.orthographicCamera)
-    // this.scene.add(this.orthographicCameraHelper)
-  }
+  //   // // Orthographic Camera Helper
+  //   // this.orthographicCameraHelper = new THREE.CameraHelper(this.orthographicCamera)
+  //   // this.scene.add(this.orthographicCameraHelper)
+  // }
 
   setOrbitControls() {
     this.controls = new OrbitControls(this.perspectiveCamera, this.canvas)
@@ -122,16 +122,15 @@ export default class Camera {
     this.perspectiveCamera.aspect = this.sizes.aspect
     this.perspectiveCamera.updateProjectionMatrix()
 
-    // Updating Orthographic Camera on Resize
-    this.orthographicCamera.left = (-this.sizes.aspect * this.sizes.frustum) / 2
-    this.orthographicCamera.right = (this.sizes.aspect * this.sizes.frustum) / 2
-    this.orthographicCamera.top = this.sizes.frustum / 2
-    this.orthographicCamera.bottom = -this.sizes.frustum / 2
-    this.orthographicCamera.updateProjectionMatrix()
+    // // Updating Orthographic Camera on Resize
+    // this.orthographicCamera.left = (-this.sizes.aspect * this.sizes.frustum) / 2
+    // this.orthographicCamera.right = (this.sizes.aspect * this.sizes.frustum) / 2
+    // this.orthographicCamera.top = this.sizes.frustum / 2
+    // this.orthographicCamera.bottom = -this.sizes.frustum / 2
+    // this.orthographicCamera.updateProjectionMatrix()
   }
 
   update() {
-    // console.log(this.perspectiveCamera.position);
     this.controls.update()
 
     // // Updating Orthographic Camera Helper

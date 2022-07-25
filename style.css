@@ -379,7 +379,7 @@ svg {
   color: var(--color-primary);
 }
 
-.section-title-decoration {
+/* .section-title-decoration {
   position: absolute;
   display: block;
   width: 100%;
@@ -402,7 +402,7 @@ svg {
   top: 6rem;
   transform: skewY(25deg);
   background-color: var(--color-primary);
-}
+} */
 
 .section-number {
   position: absolute;

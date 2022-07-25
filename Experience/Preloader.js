@@ -34,7 +34,6 @@ export default class Preloader extends EventEmitter {
     convert(document.querySelector('.second-sub'))
     this.bike = this.experience.world.bike.actualBike
     this.bikeChildren = this.experience.world.bike.bikeChildren
-    console.log(this.bikeChildren);
   }
 
   firstIntro() {
@@ -120,7 +119,7 @@ export default class Preloader extends EventEmitter {
         y: 2,
         z: 2
       }, 'same')
-      .to(this.camera.orthographicCamera.position, {
+      .to(this.camera.perspectiveCamera.position, {
         y: 1.25
       }, 'same')
       .to(this.bikeChildren.preloader.position, {

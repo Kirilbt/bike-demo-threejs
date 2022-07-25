@@ -95,7 +95,8 @@ export default class Controls {
             scrub: 0.6,
             invalidateOnRefresh: true
           }
-        }).to(this.camera.orthographicCamera.position, {
+        })
+        .to(this.camera.perspectiveCamera.position, {
           x: -2.1,
           y: 1.5,
         })
@@ -139,7 +140,7 @@ export default class Controls {
             invalidateOnRefresh: true
           }
         })
-        .to(this.camera.orthographicCamera.position, {
+        .to(this.camera.perspectiveCamera.position, {
           x: -4.1,
           y: 1.5,
         })
@@ -205,7 +206,7 @@ export default class Controls {
             invalidateOnRefresh: true
           }
         })
-        .to(this.camera.orthographicCamera.position, {
+        .to(this.camera.perspectiveCamera.position, {
           x: 3,
           y: 1.5,
         })
