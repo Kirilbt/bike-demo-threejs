@@ -1,9 +1,10 @@
 @import url("https://use.typekit.net/rlp6ofa.css");
 
-@font-face {
+/* @font-face {
   font-family: FormulaCondensed-Regular;
   src: url('/fonts/FormulaCondensed-Regular.otf');
-}
+  font-display: auto;
+} */
 
 *  {
   margin: 0;

@@ -13,6 +13,15 @@ export default class Controls {
     this.time = this.experience.time
     this.camera = this.experience.camera
     this.actualBike = this.experience.world.bike.actualBike
+    this.group = this.experience.world.bike.group
+    this.bikeChildren = this.experience.world.bike.bikeChildren
+    this.lookAtCube = this.bikeChildren.lookAtCube
+    this.worldPostCube = new THREE.Vector3()
+    this.zoom = {
+      zoomValue: this.camera.perspectiveCamera.zoom
+    }
+
+    console.log(this.bikeChildren);
 
     this.actualBike.children.forEach(child => {
       if(child.type === 'RectAreaLight') {
@@ -37,37 +46,42 @@ export default class Controls {
     const asscroll = new ASScroll({
       // ease: 0.5,
       disableRaf: true
-    });
+    })
 
 
-    GSAP.ticker.add(asscroll.update);
+    GSAP.ticker.add(asscroll.update)
 
     ScrollTrigger.defaults({
-      scroller: asscroll.containerElement });
+      scroller: asscroll.containerElement })
 
 
     ScrollTrigger.scrollerProxy(asscroll.containerElement, {
       scrollTop(value) {
         if (arguments.length) {
-          asscroll.currentPos = value;
-          return;
+          asscroll.currentPos = value
+          return
         }
-        return asscroll.currentPos;
+        return asscroll.currentPos
       },
       getBoundingClientRect() {
-        return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
+        return {
+          top: 0,
+          left: 0,
+          width: window.innerWidth,
+          height: window.innerHeight
+        }
       },
-      fixedMarkers: true });
+      fixedMarkers: true })
 
 
-    asscroll.on("update", ScrollTrigger.update);
-    ScrollTrigger.addEventListener("refresh", asscroll.resize);
+    asscroll.on("update", ScrollTrigger.update)
+    ScrollTrigger.addEventListener("refresh", asscroll.resize)
 
     requestAnimationFrame(() => {
       asscroll.enable({
-        newScrollElements: document.querySelectorAll(".gsap-marker-start, .gsap-marker-end, [asscroll]") });
-
-    });
+        newScrollElements: document.querySelectorAll(".gsap-marker-start, .gsap-marker-end, [asscroll]")
+      })
+    })
     return asscroll;
   }
 
@@ -82,7 +96,7 @@ export default class Controls {
         console.log('fired desktop');
 
         // Resets
-        this.actualBike.scale.set(1, 1, 1)
+        this.actualBike.scale.set(0.65, 0.65, 0.65)
         this.rectLight.width = 1
         this.rectLight.height = 1
 
@@ -96,14 +110,32 @@ export default class Controls {
             invalidateOnRefresh: true
           }
         })
+        .to(this.lookAtCube.position, {
+          x: this.bikeChildren.cockpit.position.x,
+          y: this.bikeChildren.cockpit.position.y,
+          z: this.bikeChildren.cockpit.position.z
+        }, 'same')
+        .to(this.actualBike.rotation, {
+          y: Math.PI / 1,
+        }, 'same')
         .to(this.camera.perspectiveCamera.position, {
-          x: -2.1,
-          y: 1.5,
-        })
+          x: -5,
+          y: 6
+        }, 'same')
+        .to(this.zoom, {
+          zoomValue: 3,
+          onUpdate: () => {
+              this.camera.perspectiveCamera.zoom = this.zoom.zoomValue
+              this.camera.perspectiveCamera.updateProjectionMatrix()
+          },
+        }, 'same')
 
         // Second Section
         this.secondMoveTimeline = new GSAP.timeline({
           scrollTrigger: {
+            onStart: () => {
+              this.worldPostCube.z += 1.25
+            },
             trigger: '.second-move',
             start: 'top top',
             end: 'bottom bottom',
@@ -111,23 +143,25 @@ export default class Controls {
             invalidateOnRefresh: true
           }
         })
-        .to(this.actualBike.position, {
-          x: () => {
-            return 0.5
-          },
-          z: () => {
-            return this.sizes.height * 0.0032
-          }
-        }, 'same-position')
-        .to(this.actualBike.scale, {
-          x: 2,
+        .to(this.lookAtCube.position, {
+          x: this.bikeChildren.drivetrain.position.x,
+          y: this.bikeChildren.drivetrain.position.y,
+          z: this.bikeChildren.drivetrain.position.z
+        }, 'same')
+        .to(this.actualBike.rotation, {
+          y: - Math.PI / 4,
+        }, 'same')
+        .to(this.camera.perspectiveCamera.position, {
           y: 2,
-          z: 2
-        }, 'same-position')
-        .to(this.rectLight, {
-          width: 1 * 2, // !!! same increased values as actualBike
-          height: 1 * 2, // !!! same increased values as actualBike
-        }, 'same-position')
+          x: -7,
+        }, 'same')
+        .to(this.zoom, {
+          zoomValue: 3,
+          onUpdate: () => {
+            this.camera.perspectiveCamera.zoom = this.zoom.zoomValue
+            this.camera.perspectiveCamera.updateProjectionMatrix()
+          }
+        }, 'same')
 
         // Third Section
         this.thirdMoveTimeline = new GSAP.timeline({
@@ -140,10 +174,25 @@ export default class Controls {
             invalidateOnRefresh: true
           }
         })
+        .to(this.lookAtCube.position, {
+          x: this.bikeChildren.seat.position.x,
+          y: this.bikeChildren.seat.position.y,
+          z: this.bikeChildren.seat.position.z
+        }, 'same')
+        .to(this.actualBike.rotation, {
+          y: -Math.PI,
+        }, 'same')
         .to(this.camera.perspectiveCamera.position, {
           x: -4.1,
-          y: 1.5,
-        })
+          y: 5,
+        }, 'same')
+        .to(this.zoom, {
+          zoomValue: 2,
+          onUpdate: () => {
+            this.camera.perspectiveCamera.zoom = this.zoom.zoomValue
+            this.camera.perspectiveCamera.updateProjectionMatrix()
+          }
+        }, 'same')
       },
 
       // Mobile
@@ -328,5 +377,14 @@ export default class Controls {
 
   resize() {}
 
-  update() {}
+  update() {
+    this.lookAtCube.getWorldPosition(this.worldPostCube)
+    // Always Offset the Camera 0.75 in the z-direction of the lookAtCube
+    this.worldPostCube.z -= 1.25
+
+    this.camera.perspectiveCamera.lookAt(this.worldPostCube)
+
+    // Only look at the original location of the lookAtCube
+    // this.camera.perspectiveCamera.lookAt(this.lookAtCube.position)
+  }
 }

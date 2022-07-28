@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import { Camera } from "three";
 import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper.js'
 import GSAP from 'gsap'
 import Experience from '../Experience.js'
@@ -20,10 +21,14 @@ export default class Bike {
 
     this.setModel()
     this.setRectAreaLight()
+    this.setLookAtCube()
     this.onMouseMove()
+    this.setBikeGroup()
   }
 
   setModel() {
+    this.actualBike.scale.set(0, 0, 0)
+
     this.actualBike.traverse((child) => {
       if(child instanceof THREE.Mesh) {
         // Shadows
@@ -39,15 +44,14 @@ export default class Bike {
       // child.scale.set(0, 0, 0)
 
       if(child.name === 'Preloader') {
-        // console.log(child);
-        // child.scale.set(1, 1, 1)
+        child.scale.set(1, 1, 1)
         child.rotation.y = Math.PI / 4
       }
 
       this.bikeChildren[child.name.toLowerCase()] = child
     })
 
-    this.scene.add(this.actualBike)
+    // this.scene.add(this.actualBike)
   }
 
   setRectAreaLight() {
@@ -65,6 +69,20 @@ export default class Bike {
     // // Rect Area Light Helper
     // const rectLightHelper = new RectAreaLightHelper( rectLight );
     // rectLight.add( rectLightHelper )
+  }
+
+  setLookAtCube() {
+    const geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5)
+    const material = new THREE.MeshBasicMaterial({
+      color: 0xff0000,
+      wireframe: true
+    })
+    this.lookAtCube = new THREE.Mesh(geometry, material)
+    // this.lookAtCube.material.visible = false // Make it Invisible
+    this.lookAtCube.position.y = 1
+    this.actualBike.add(this.lookAtCube)
+
+    this.bikeChildren['lookAtCube'] = this.lookAtCube
   }
 
   switchTheme(theme) {
@@ -86,6 +104,14 @@ export default class Bike {
     })
   }
 
+  setBikeGroup() {
+    // New group so we can rotate the bike with GSAP without intefering with our mouse rotation lerping
+    // Like a spinning plateform that can spin independetly from others
+    this.group = new THREE.Group()
+    this.group.add(this.actualBike)
+    this.scene.add(this.group)
+  }
+
   resize() {}
 
   update() {
@@ -95,6 +121,6 @@ export default class Bike {
       this.lerp.ease
     )
 
-    this.actualBike.rotation.y = this.lerp.current
+    this.group.rotation.y = this.lerp.current
   }
 }

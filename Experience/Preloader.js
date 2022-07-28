@@ -1,5 +1,4 @@
 import GSAP from 'gsap'
-
 import { EventEmitter } from 'events'
 import convert from './Utils/convertDivsToSpans'
 
@@ -32,7 +31,8 @@ export default class Preloader extends EventEmitter {
     convert(document.querySelector('.hero-main-description'))
     convert(document.querySelector('.hero-second-subheading'))
     convert(document.querySelector('.second-sub'))
-    this.bike = this.experience.world.bike.actualBike
+    this.group = this.experience.world.bike.group
+    this.actualBike = this.experience.world.bike.actualBike
     this.bikeChildren = this.experience.world.bike.bikeChildren
   }
 
@@ -56,8 +56,8 @@ export default class Preloader extends EventEmitter {
           ease: 'back.out(2.5)',
           duration: 0.7
         })
-        .to(this.bike.position, {
-          x: -1,
+        .to(this.group.position, {
+          x: -0.25,
           ease: 'power1.out',
           duration: 0.7,
           onComplete: resolve
@@ -70,7 +70,7 @@ export default class Preloader extends EventEmitter {
           ease: 'back.out(2.5)',
           duration: 0.7
         })
-        .to(this.bike.position, {
+        .to(this.group.position, {
           z: -1,
           ease: 'power1.out',
           duration: 0.7
@@ -105,14 +105,14 @@ export default class Preloader extends EventEmitter {
       .to('.arrow-svg-wrapper', {
         opacity: 0
       }, 'fadeout')
-      .to(this.bike.position, {
-        x: 0,
+      .to(this.group.position, {
+        x: 1,
         y: 0,
         z: 0,
         ease: 'power1.out'
       }, 'same')
       .to(this.bikeChildren.preloader.rotation, {
-        y: 2*Math.PI + Math.PI/4
+        y: 2 * Math.PI + Math.PI/4
       }, 'same')
       .to(this.bikeChildren.preloader.scale, {
         x: 2,
@@ -127,11 +127,12 @@ export default class Preloader extends EventEmitter {
         y: 0,
         z: 0
       }, 'same')
-      .set(this.bikeChildren.bike.scale, {
-        x: 1,
-        y: 1,
-        z: 1
-      })
+      .set(this.actualBike.scale, {
+        x: 0.65,
+        y: 0.65,
+        z: 0.65,
+        ease: 'power1.out'
+      }, 'same')
       .to(this.bikeChildren.preloader.scale, {
         x: 0,
         y: 0,
@@ -220,17 +221,17 @@ export default class Preloader extends EventEmitter {
 
   move() {
     if(this.device === 'desktop') {
-      this.bike.position.set(-1, 0, 0) // same values as provided to gsap
+      this.group.position.set(-1, 0, 0) // same values as provided to gsap
     } else {
-      this.bike.position.set(0, 0, -1) // same values as provided to gsap
+      this.group.position.set(0, 0, -1) // same values as provided to gsap
     }
   }
 
   scale() {
     if(this.device === 'desktop') {
-      this.bike.scale.set(1, 1, 1) // same values as provided to gsap
+      this.group.scale.set(1, 1, 1) // same values as provided to gsap
     } else {
-      this.bike.scale.set(0.5, 0.5, 0.5) // same values as provided to gsap
+      this.group.scale.set(0.5, 0.5, 0.5) // same values as provided to gsap
     }
   }
 
