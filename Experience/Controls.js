@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import GSAP from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger.js'
 import ASScroll from '@ashthornton/asscroll'
-import Experience from '../Experience.js'
+import Experience from './Experience.js'
 
 export default class Controls {
   constructor() {
@@ -379,7 +379,7 @@ export default class Controls {
 
   update() {
     this.lookAtCube.getWorldPosition(this.worldPostCube)
-    // Always Offset the Camera 0.75 in the z-direction of the lookAtCube
+    // Always Offset the Camera in the z-direction of the lookAtCube
     this.worldPostCube.z -= 1.25
 
     this.camera.perspectiveCamera.lookAt(this.worldPostCube)

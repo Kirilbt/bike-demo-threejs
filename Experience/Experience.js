@@ -12,7 +12,7 @@ import Preloader from './Preloader.js'
 import Theme from './Theme.js'
 
 import World from './World/World.js'
-import Controls from './World/Controls.js'
+import Controls from './Controls.js'
 
 export default class Experience {
   static instance
