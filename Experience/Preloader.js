@@ -86,7 +86,7 @@ export default class Preloader extends EventEmitter {
       .to('.arrow-svg-wrapper', {
         opacity: 1
       }, 'fadein')
-      .to('.toggle-bar', {
+      .to('.navbar', {
         opacity: 1,
         onComplete: resolve
       }, 'fadein')

@@ -193,6 +193,7 @@ svg {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  opacity: 0;
   z-index: 99999999;
 }
 
@@ -226,7 +227,6 @@ svg {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  opacity: 0;
   z-index: 99999;
 }
 
@@ -295,9 +295,11 @@ svg {
 
 .hero-second {
   position: absolute;
-  top: calc(50% - 3rem);
   right: 0;
+  top: 50%;
+  transform: translateY(-50%);
   color: var(--color-text);
+  text-align: right;
 }
 
 .hero-main-title {
@@ -492,8 +494,42 @@ svg {
     width: 100%;
   }
 
+  .arrow-svg-wrapper {
+    bottom: 2.2rem;
+    right: 0;
+    left: unset;
+  }
+
+  .navbar {
+    top: 1.5rem;
+    width: calc(100% - 4rem);
+    align-items: flex-start;
+  }
+
+  .navbar-right {
+    height: 100vh;
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .toggle-bar {
+    margin-top: 0.1rem;
+    align-items: center;
+    max-height: 2rem;
+  }
+
+  .navbar-button {
+    position: fixed;
+    bottom: 3rem;
+    left: 0;
+    font-size: 1rem;
+    z-index: 9999999999;
+    margin-left: 0;
+  }
+
   .section {
     width: 100%;
+    padding: 62.5rem 2rem;
   }
 
   .progress-bar-wrapper-left {
@@ -502,11 +538,11 @@ svg {
   }
 
   .hero-main {
-    bottom: 8.5rem;
+    bottom: 6.5rem;
   }
 
   .hero-second {
-    top: 10rem;
+    top: calc(50% - 12rem);
   }
 
   .hero-wrapper {
@@ -514,7 +550,7 @@ svg {
   }
 
   .hero-main-title {
-    font-size: 2rem;
+    font-size: 5rem;
   }
 
   .hero-main-description {
