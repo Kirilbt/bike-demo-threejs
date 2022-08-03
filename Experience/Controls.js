@@ -97,6 +97,7 @@ export default class Controls {
 
         // Resets
         this.actualBike.scale.set(0.65, 0.65, 0.65)
+        this.actualBike.position.set(0, 0, 0)
         this.rectLight.width = 1
         this.rectLight.height = 1
 
@@ -133,9 +134,6 @@ export default class Controls {
         // Second Section
         this.secondMoveTimeline = new GSAP.timeline({
           scrollTrigger: {
-            onStart: () => {
-              this.worldPostCube.z += 1.25
-            },
             trigger: '.second-move',
             start: 'top top',
             end: 'bottom bottom',
@@ -200,7 +198,7 @@ export default class Controls {
         console.log('fired mobile')
 
         // Resets
-        this.actualBike.scale.set(0.5, 0.5, 0.5)
+        this.actualBike.scale.set(0.65, 0.65, 0.65)
         this.actualBike.position.set(0, 0, 0)
         this.rectLight.width = 1 * 0.5 // !!! same increased values as actualBike
         this.rectLight.height = 1 * 0.5 // !!! same increased values as actualBike

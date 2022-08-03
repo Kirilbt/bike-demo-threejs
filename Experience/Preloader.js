@@ -1,3 +1,4 @@
+import * as THREE from 'three'
 import GSAP from 'gsap'
 import { EventEmitter } from 'events'
 import convert from './Utils/convertDivsToSpans'
@@ -34,6 +35,7 @@ export default class Preloader extends EventEmitter {
     this.group = this.experience.world.bike.group
     this.actualBike = this.experience.world.bike.actualBike
     this.bikeChildren = this.experience.world.bike.bikeChildren
+    this.lookAtCube = this.bikeChildren.lookAtCube
   }
 
   firstIntro() {
@@ -56,11 +58,8 @@ export default class Preloader extends EventEmitter {
           ease: 'back.out(2.5)',
           duration: 0.7
         })
-        .to(this.group.position, {
-          x: -0.25,
-          ease: 'power1.out',
-          duration: 0.7,
-          onComplete: resolve
+        .to(this.scene.position, {
+          y: -0.9,
         })
       } else {
         this.timeline.to(this.bikeChildren.preloader.scale, {
@@ -68,11 +67,6 @@ export default class Preloader extends EventEmitter {
           y: 0.3,
           z: 0.3,
           ease: 'back.out(2.5)',
-          duration: 0.7
-        })
-        .to(this.group.position, {
-          z: -1,
-          ease: 'power1.out',
           duration: 0.7
         })
       }
@@ -119,20 +113,23 @@ export default class Preloader extends EventEmitter {
         y: 2,
         z: 2
       }, 'same')
-      .to(this.camera.perspectiveCamera.position, {
-        y: 1.25
-      }, 'same')
+      // .to(this.camera.perspectiveCamera.position, {
+      //   x: 1,
+      //   y: 0.5,
+      //   z: 4
+      // }, 'same')
       .to(this.bikeChildren.preloader.position, {
         x: 0,
         y: 0,
         z: 0
       }, 'same')
-      .set(this.actualBike.scale, {
+      .to(this.actualBike.scale, {
         x: 0.65,
         y: 0.65,
         z: 0.65,
+        stagger: 2,
         ease: 'power1.out'
-      }, 'same')
+      })
       .to(this.bikeChildren.preloader.scale, {
         x: 0,
         y: 0,
@@ -231,7 +228,7 @@ export default class Preloader extends EventEmitter {
     if(this.device === 'desktop') {
       this.group.scale.set(1, 1, 1) // same values as provided to gsap
     } else {
-      this.group.scale.set(0.5, 0.5, 0.5) // same values as provided to gsap
+      this.group.scale.set(0.65, 0.65, 0.65) // same values as provided to gsap
     }
   }
 

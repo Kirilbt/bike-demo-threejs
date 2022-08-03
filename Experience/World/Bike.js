@@ -27,7 +27,7 @@ export default class Bike {
   }
 
   setModel() {
-    this.actualBike.scale.set(0, 0, 0)
+    // this.actualBike.scale.set(0, 0, 0)
 
     this.actualBike.traverse((child) => {
       if(child instanceof THREE.Mesh) {
@@ -40,9 +40,6 @@ export default class Bike {
         child.material.color.set(0xd7d8d9)
       }
 
-      // console.log(child.name)
-      // child.scale.set(0, 0, 0)
-
       if(child.name === 'Preloader') {
         child.scale.set(1, 1, 1)
         child.rotation.y = Math.PI / 4
@@ -50,8 +47,6 @@ export default class Bike {
 
       this.bikeChildren[child.name.toLowerCase()] = child
     })
-
-    // this.scene.add(this.actualBike)
   }
 
   setRectAreaLight() {

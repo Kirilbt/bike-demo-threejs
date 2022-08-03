@@ -331,7 +331,7 @@ svg {
 .section {
   position: relative;
   width: 50%;
-  padding: 62.5rem 5rem;
+  padding: 55rem 5rem;
   margin: 0;
   background-color: var(--color-background);
   /* backdrop-filter: blur(10px); */
@@ -352,7 +352,7 @@ svg {
 
 .progress-wrapper {
   height: 0;
-  width: 0.8rem;
+  width: 0.25rem;
   z-index: 9999;
 }
 
@@ -371,7 +371,7 @@ svg {
 .progress-bar {
   height: 100vh;
   width: 100%;
-  background-color: var(--color-primary);
+  background-color: var(--color-cta);
   transform-origin: top center;
   transform: scaleY(1);
 }
@@ -380,7 +380,7 @@ svg {
   position: relative;
   padding: 20% 0;
   border-bottom: 1px solid var(--color-text);
-  padding-bottom: 25rem;
+  padding-bottom: 15rem;
 }
 
 .section-detail-wrapper {
@@ -470,7 +470,7 @@ svg {
 }
 
 .secondary-background {
-  background-color: var(--color-secondary);
+  background-color: var(--color-cta);
 }
 
 .tertiary-text {
@@ -482,7 +482,7 @@ svg {
 }
 
 .tertiary-background {
-  background-color: var(--color-tertiary);
+  background-color: var(--color-cta);
 }
 
 /* Media Queries */
@@ -520,7 +520,7 @@ svg {
 
   .navbar-button {
     position: fixed;
-    bottom: 3rem;
+    bottom: 3.5rem;
     left: 0;
     font-size: 1rem;
     z-index: 9999999999;
