@@ -20,8 +20,10 @@ export default class Controls {
     this.zoom = {
       zoomValue: this.camera.perspectiveCamera.zoom
     }
-
-    console.log(this.bikeChildren);
+    this.offSetObject = {
+      offsetZ: 0,
+      offsetY: 0
+    }
 
     this.actualBike.children.forEach(child => {
       if(child.type === 'RectAreaLight') {
@@ -89,6 +91,23 @@ export default class Controls {
     this.asscroll = this.setupASScroll()
   }
 
+  reset() {
+    this.actualBike.scale.set(0.65, 0.65, 0.65)
+    this.actualBike.position.set(0, 0, 0)
+    this.rectLight.width = 1
+    this.rectLight.height = 1
+    this.offSetObject.offsetZ = 0
+    this.offSetObject.offsetY = 0
+    this.camera.perspectiveCamera.position.x = 0
+    this.camera.perspectiveCamera.position.y = 0.5
+    this.camera.perspectiveCamera.position.z = 4
+    this.camera.perspectiveCamera.zoom = 1
+    this.lookAtCube.position.set(0, 1, 0)
+    this.worldPostCube.set(0, 0.65, 0)
+    this.actualBike.rotation.y = 0
+    this.zoom.zoomValue = 1
+  }
+
   setScrollTrigger() {
     ScrollTrigger.matchMedia({
       // Desktop
@@ -96,10 +115,7 @@ export default class Controls {
         console.log('fired desktop');
 
         // Resets
-        this.actualBike.scale.set(0.65, 0.65, 0.65)
-        this.actualBike.position.set(0, 0, 0)
-        this.rectLight.width = 1
-        this.rectLight.height = 1
+        this.reset()
 
         // First Section
         this.firstMoveTimeline = new GSAP.timeline({
@@ -118,6 +134,10 @@ export default class Controls {
         }, 'same')
         .to(this.actualBike.rotation, {
           y: Math.PI / 1,
+        }, 'same')
+        .to(this.offSetObject, {
+          offsetZ: 1.2,
+          offsetY: 0.8
         }, 'same')
         .to(this.camera.perspectiveCamera.position, {
           x: -5,
@@ -148,6 +168,10 @@ export default class Controls {
         }, 'same')
         .to(this.actualBike.rotation, {
           y: - Math.PI / 4,
+        }, 'same')
+        .to(this.offSetObject, {
+          offsetZ: - 0.8,
+          offsetY: 0
         }, 'same')
         .to(this.camera.perspectiveCamera.position, {
           y: 2,
@@ -180,9 +204,13 @@ export default class Controls {
         .to(this.actualBike.rotation, {
           y: -Math.PI,
         }, 'same')
+        .to(this.offSetObject, {
+          offsetZ: 1.5,
+          offsetY: 0.5
+        }, 'same')
         .to(this.camera.perspectiveCamera.position, {
           x: -4.1,
-          y: 5,
+          y: 3,
         }, 'same')
         .to(this.zoom, {
           zoomValue: 2,
@@ -378,7 +406,9 @@ export default class Controls {
   update() {
     this.lookAtCube.getWorldPosition(this.worldPostCube)
     // Always Offset the Camera in the z-direction of the lookAtCube
-    this.worldPostCube.z -= 1.25
+    this.worldPostCube.z -= this.offSetObject.offsetZ
+    // Always Offset the Camera in the y-direction of the lookAtCube
+    this.worldPostCube.y -= this.offSetObject.offsetY
 
     this.camera.perspectiveCamera.lookAt(this.worldPostCube)
 

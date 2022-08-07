@@ -41,9 +41,10 @@ export default class Camera {
       1000
     )
     this.scene.add(this.perspectiveCamera)
-    this.perspectiveCamera.position.x = 1
+
     this.perspectiveCamera.position.y = 0.5
     this.perspectiveCamera.position.z = 4
+    this.perspectiveCamera.lookAt(0, 0.65, 0);
 
     // Perspective Camera Helper
     this.perspectiveCameraHelper = new THREE.CameraHelper(this.perspectiveCamera)

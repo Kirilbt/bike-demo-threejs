@@ -58,9 +58,6 @@ export default class Preloader extends EventEmitter {
           ease: 'back.out(2.5)',
           duration: 0.7
         })
-        .to(this.scene.position, {
-          y: -0.9,
-        })
       } else {
         this.timeline.to(this.bikeChildren.preloader.scale, {
           x: 0.3,
@@ -99,12 +96,12 @@ export default class Preloader extends EventEmitter {
       .to('.arrow-svg-wrapper', {
         opacity: 0
       }, 'fadeout')
-      .to(this.group.position, {
-        x: 1,
-        y: 0,
-        z: 0,
-        ease: 'power1.out'
-      }, 'same')
+      // .to(this.group.position, {
+      //   x: 1,
+      //   y: 0,
+      //   z: 0,
+      //   ease: 'power1.out'
+      // }, 'same')
       .to(this.bikeChildren.preloader.rotation, {
         y: 2 * Math.PI + Math.PI/4
       }, 'same')
@@ -118,11 +115,11 @@ export default class Preloader extends EventEmitter {
       //   y: 0.5,
       //   z: 4
       // }, 'same')
-      .to(this.bikeChildren.preloader.position, {
-        x: 0,
-        y: 0,
-        z: 0
-      }, 'same')
+      // .to(this.bikeChildren.preloader.position, {
+      //   x: 0,
+      //   y: 0,
+      //   z: 0
+      // }, 'same')
       .to(this.actualBike.scale, {
         x: 0.65,
         y: 0.65,
@@ -217,11 +214,11 @@ export default class Preloader extends EventEmitter {
   }
 
   move() {
-    if(this.device === 'desktop') {
-      this.group.position.set(-1, 0, 0) // same values as provided to gsap
-    } else {
-      this.group.position.set(0, 0, -1) // same values as provided to gsap
-    }
+    // if(this.device === 'desktop') {
+    //   this.group.position.set(-1, 0, 0) // same values as provided to gsap
+    // } else {
+    //   this.group.position.set(0, 0, -1) // same values as provided to gsap
+    // }
   }
 
   scale() {
