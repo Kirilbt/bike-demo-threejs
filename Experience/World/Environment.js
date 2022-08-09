@@ -20,12 +20,13 @@ export default class Environment {
     // Setup
     this.setBackground()
     this.setLight()
+    this.setEnvironmentMap()
   }
 
   setBackground() {
     this.bgColor = 0xd7d8d9
     this.scene.background = new THREE.Color(this.bgColor)
-    this.scene.fog = new THREE.Fog(this.bgColor, 1, 20)
+    this.scene.fog = new THREE.Fog(this.bgColor, 5, 20)
   }
 
   setLight() {
@@ -110,6 +111,29 @@ export default class Environment {
         .max(10)
         .step(0.001)
     }
+  }
+
+  setEnvironmentMap() {
+    this.environmentMap = {}
+    this.environmentMap.intensity = 0.4
+    this.environmentMap.texture = this.resources.items.environmentMapTexture
+    this.environmentMap.texture.encoding = THREE.sRGBEncoding
+
+    this.scene.environment = this.environmentMap.texture
+
+    this.environmentMap.updateMaterials = () =>
+        {
+            this.scene.traverse((child) =>
+            {
+                if(child instanceof THREE.Mesh && child.material instanceof THREE.MeshStandardMaterial)
+                {
+                    child.material.envMap = this.environmentMap.texture
+                    child.material.envMapIntensity = this.environmentMap.intensity
+                    child.material.needsUpdate = true
+                }
+            })
+        }
+        this.environmentMap.updateMaterials()
   }
 
   switchTheme(theme) {

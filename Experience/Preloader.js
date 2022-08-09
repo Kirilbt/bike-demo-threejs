@@ -51,12 +51,10 @@ export default class Preloader extends EventEmitter {
       })
 
       if (this.device === 'desktop') {
-        this.timeline.to(this.bikeChildren.preloader.scale, {
-          x: 0.3,
-          y: 0.3,
-          z: 0.3,
-          ease: 'back.out(2.5)',
-          duration: 0.7
+        this.timeline.to(this.actualBike.scale, {
+          x: 0.5,
+          y: 0.5,
+          z: 0.5,
         })
       } else {
         this.timeline.to(this.bikeChildren.preloader.scale, {
@@ -96,30 +94,9 @@ export default class Preloader extends EventEmitter {
       .to('.arrow-svg-wrapper', {
         opacity: 0
       }, 'fadeout')
-      // .to(this.group.position, {
-      //   x: 1,
-      //   y: 0,
-      //   z: 0,
-      //   ease: 'power1.out'
-      // }, 'same')
-      .to(this.bikeChildren.preloader.rotation, {
-        y: 2 * Math.PI + Math.PI/4
+      .to(this.actualBike.rotation, {
+        y: 2 * Math.PI
       }, 'same')
-      .to(this.bikeChildren.preloader.scale, {
-        x: 2,
-        y: 2,
-        z: 2
-      }, 'same')
-      // .to(this.camera.perspectiveCamera.position, {
-      //   x: 1,
-      //   y: 0.5,
-      //   z: 4
-      // }, 'same')
-      // .to(this.bikeChildren.preloader.position, {
-      //   x: 0,
-      //   y: 0,
-      //   z: 0
-      // }, 'same')
       .to(this.actualBike.scale, {
         x: 0.65,
         y: 0.65,

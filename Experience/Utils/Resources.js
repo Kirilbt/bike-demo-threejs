@@ -18,6 +18,7 @@ export default class Resources extends EventEmitter {
 
     this.setLoaders()
     this.startLoading()
+    console.log(this.items);
   }
 
   setLoaders() {
@@ -26,7 +27,7 @@ export default class Resources extends EventEmitter {
     this.loaders.dracoLoader = new DRACOLoader()
     this.loaders.dracoLoader.setDecoderPath("/draco/")
     this.loaders.gltfLoader.setDRACOLoader(this.loaders.dracoLoader)
-
+    this.loaders.cubeTextureLoader = new THREE.CubeTextureLoader()
   }
 
   startLoading() {
@@ -35,7 +36,11 @@ export default class Resources extends EventEmitter {
         this.loaders.gltfLoader.load(asset.path, (file) => {
           this.singleAssetLoaded(asset, file)
         })
-      } else if (asset.type === "videoTexture") {
+      } else if (asset.type === 'cubeTexture') {
+        this.loaders.cubeTextureLoader.load(asset.path, (file => {
+          this.singleAssetLoaded(asset, file)
+        }))
+      } else if (asset.type === 'videoTexture') {
         this.video = {}
         this.videoTexture = {}
 

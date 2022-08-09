@@ -1,5 +1,6 @@
 import * as THREE from 'three'
-import { Camera } from "three";
+import { Camera } from 'three'
+import { EXRLoader } from 'three/examples/jsm/loaders/EXRLoader.js'
 import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper.js'
 import GSAP from 'gsap'
 import Experience from '../Experience.js'
@@ -27,7 +28,7 @@ export default class Bike {
   }
 
   setModel() {
-    // this.actualBike.scale.set(0, 0, 0)
+    this.actualBike.scale.set(0, 0, 0)
 
     this.actualBike.traverse((child) => {
       if(child instanceof THREE.Mesh) {
@@ -41,8 +42,168 @@ export default class Bike {
       }
 
       if(child.name === 'Preloader') {
-        child.scale.set(1, 1, 1)
-        child.rotation.y = Math.PI / 4
+        child.material.side = THREE.BackSide
+      }
+
+      if(child.name === 'BrakeF') {
+        child.material.color.set(0x050505)
+      }
+
+      if(child.name === 'BrakeB') {
+        child.material.color.set(0x050505)
+      }
+
+      if(child.name === 'BrakePadsF') {
+        child.material.color.set(0x050505)
+      }
+
+      if(child.name === 'BrakePadsB') {
+        child.material.color.set(0x050505)
+      }
+
+      if(child.name === 'BrakeCableF') {
+        child.material.color.set(0xff8c00)
+      }
+
+      if(child.name === 'BrakeCableB') {
+        child.material.color.set(0xff8c00)
+      }
+
+      if(child.name === 'BrakeDetailF') {
+        child.material.color.set(0xff8c00)
+      }
+
+      if(child.name === 'BrakeDetailB') {
+        child.material.color.set(0xff8c00)
+      }
+
+      if(child.name === 'Frame') {
+        child.material.metalness = 1
+        child.material.roughness = 0
+      }
+
+      if(child.name === 'Chain1') {
+        child.material.color.set(0x050505)
+        child.material.metalness = 1
+        child.material.roughness = 0
+      }
+
+      if(child.name === 'Chain2') {
+        child.material.color.set(0x050505)
+        child.material.metalness = 1
+        child.material.roughness = 0
+      }
+
+      if(child.name === 'ChainringsCover') {
+        child.material.color.set(0x050505)
+        child.material.metalness = 1
+        child.material.roughness = 0
+      }
+
+      if(child.name === 'CrankArm') {
+        child.material.metalness = 1
+        child.material.roughness = 0
+      }
+
+      if(child.name === 'Cassette') {
+        child.material.metalness = 1
+        child.material.roughness = 0
+      }
+
+      if(child.name === 'PedalL') {
+        child.material.color.set(0x050505)
+      }
+
+      if(child.name === 'PedalR') {
+        child.material.color.set(0x050505)
+      }
+
+      if(child.name === 'PedalGripL') {
+        child.material.color.set(0x050505)
+      }
+
+      if(child.name === 'PedalGripR') {
+        child.material.color.set(0x050505)
+      }
+
+      if(child.name === 'CockpitStem') {
+        child.material.color.set(0x050505)
+        child.material.metalness = 0.5
+        child.material.roughness = 0
+      }
+
+      if(child.name === 'CockpitHandlebar') {
+        child.material.color.set(0x050505)
+        child.material.roughness = 1
+      }
+
+      if(child.name === 'TireF') {
+        child.material.color.set(0x050505)
+        child.material.roughness = 1
+      }
+
+      if(child.name === 'TireB') {
+        child.material.color.set(0x050505)
+        child.material.roughness = 1
+      }
+
+      if(child.name === 'RimF') {
+        child.material.metalness = 0.5
+        child.material.roughness = 0
+      }
+
+      if(child.name === 'RimB') {
+        child.material.metalness = 0.5
+        child.material.roughness = 0
+      }
+
+      if(child.name === 'RimInnerF') {
+        child.material.color.set(0xff8c00)
+        child.material.roughness = 0
+      }
+
+      if(child.name === 'RimInnerB') {
+        child.material.color.set(0xff8c00)
+        child.material.roughness = 0
+      }
+
+      if(child.name === 'SpokesF') {
+        child.material.metalness = 1
+        child.material.roughness = 0
+      }
+
+      if(child.name === 'SpokesB') {
+        child.material.metalness = 1
+        child.material.roughness = 0
+      }
+
+      if(child.name === 'FasteningF') {
+        child.material.color.set(0x050505)
+        child.material.metalness = 0.5
+        child.material.roughness = 0
+      }
+
+      if(child.name === 'FasteningB') {
+        child.material.color.set(0x050505)
+        child.material.metalness = 0.5
+        child.material.roughness = 0
+      }
+
+      if(child.name === 'HubF') {
+        child.material.color.set(0x050505)
+        child.material.metalness = 0.5
+        child.material.roughness = 0
+      }
+
+      if(child.name === 'HubB') {
+        child.material.color.set(0x050505)
+        child.material.metalness = 0.5
+        child.material.roughness = 0
+      }
+
+      if(child.name === 'Seat') {
+        child.material.color.set(0x050505)
+        child.material.roughness = 1
       }
 
       this.bikeChildren[child.name.toLowerCase()] = child
@@ -73,7 +234,7 @@ export default class Bike {
       wireframe: true
     })
     this.lookAtCube = new THREE.Mesh(geometry, material)
-    // this.lookAtCube.material.visible = false // Make it Invisible
+    this.lookAtCube.material.visible = false // Make it Invisible
     this.lookAtCube.position.y = 1
     this.actualBike.add(this.lookAtCube)
 
