@@ -37,8 +37,11 @@ export default class Bike {
         child.receiveShadow = true
 
         // Material
-        child.material = new THREE.MeshStandardMaterial
-        child.material.color.set(0xd7d8d9)
+        this.bikeMaterial = new THREE.MeshStandardMaterial({
+          color: 0xd7d8d9,
+          envMapIntensity: 1
+        })
+        child.material = this.bikeMaterial
       }
 
       if(child.name === 'Preloader') {
@@ -244,11 +247,25 @@ export default class Bike {
   switchTheme(theme) {
     if(theme === 'dark') {
       GSAP.to(this.rectLight, {
-        intensity: 1
+        intensity: 2
+      })
+      this.actualBike.traverse((child) => {
+        if(child instanceof THREE.Mesh && child.material instanceof THREE.MeshStandardMaterial) {
+          GSAP.to(child.material, {
+            envMapIntensity: 0.2
+          })
+        }
       })
     } else {
       GSAP.to(this.rectLight, {
         intensity: 5
+      })
+      this.actualBike.traverse((child) => {
+        if(child instanceof THREE.Mesh && child.material instanceof THREE.MeshStandardMaterial) {
+          GSAP.to(child.material, {
+            envMapIntensity: 1
+          })
+        }
       })
     }
   }

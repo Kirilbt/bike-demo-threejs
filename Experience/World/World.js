@@ -41,6 +41,9 @@ export default class World extends EventEmitter {
     if(this.bike) {
       this.bike.switchTheme(theme)
     }
+    if(this.floor) {
+      this.floor.switchTheme(theme)
+    }
   }
 
   resize() {

@@ -277,9 +277,9 @@ export default class Controls {
           }
         })
         .to(this.lookAtCube.position, {
-          x: this.bikeChildren.drivetrain.position.x,
-          y: this.bikeChildren.drivetrain.position.y,
-          z: this.bikeChildren.drivetrain.position.z
+          x: this.bikeChildren.chain1.position.x,
+          y: this.bikeChildren.chain1.position.y,
+          z: this.bikeChildren.chain1.position.z
         }, 'same')
         .to(this.actualBike.rotation, {
           y: - Math.PI / 4,
@@ -395,55 +395,55 @@ export default class Controls {
           })
         })
 
-        // Circle Animations
-        // First Section
-        this.firstMoveTimeline = new GSAP.timeline({
-          scrollTrigger: {
-            trigger: '.first-move',
-            start: 'top top',
-            end: 'bottom bottom',
-            scrub: 0.6,
-            invalidateOnRefresh: true
-          }
-        })
-        .to(this.circleFirst.scale, {
-          x: 3,
-          y: 3,
-          z: 3
-        })
+        // // Circle Animations
+        // // First Section
+        // this.firstMoveTimeline = new GSAP.timeline({
+        //   scrollTrigger: {
+        //     trigger: '.first-move',
+        //     start: 'top top',
+        //     end: 'bottom bottom',
+        //     scrub: 0.6,
+        //     invalidateOnRefresh: true
+        //   }
+        // })
+        // .to(this.circleFirst.scale, {
+        //   x: 3,
+        //   y: 3,
+        //   z: 3
+        // })
 
-        // Second Section
-        this.secondMoveTimeline = new GSAP.timeline({
-          scrollTrigger: {
-            trigger: '.second-move',
-            start: 'top top',
-            end: 'bottom bottom',
-            scrub: 0.6,
-            invalidateOnRefresh: true
-          }
-        })
-        .to(this.circleSecond.scale, {
-          x: 3,
-          y: 3,
-          z: 3
-        })
+        // // Second Section
+        // this.secondMoveTimeline = new GSAP.timeline({
+        //   scrollTrigger: {
+        //     trigger: '.second-move',
+        //     start: 'top top',
+        //     end: 'bottom bottom',
+        //     scrub: 0.6,
+        //     invalidateOnRefresh: true
+        //   }
+        // })
+        // .to(this.circleSecond.scale, {
+        //   x: 3,
+        //   y: 3,
+        //   z: 3
+        // })
 
-        // Third Section
-        this.thirdMoveTimeline = new GSAP.timeline({
-          scrollTrigger: {
-            trigger: '.third-move',
-            start: 'top top',
-            end: 'bottom bottom',
-            // markers: true,
-            scrub: 0.6,
-            invalidateOnRefresh: true
-          }
-        })
-        .to(this.circleThird.scale, {
-          x: 3,
-          y: 3,
-          z: 3
-        })
+        // // Third Section
+        // this.thirdMoveTimeline = new GSAP.timeline({
+        //   scrollTrigger: {
+        //     trigger: '.third-move',
+        //     start: 'top top',
+        //     end: 'bottom bottom',
+        //     // markers: true,
+        //     scrub: 0.6,
+        //     invalidateOnRefresh: true
+        //   }
+        // })
+        // .to(this.circleThird.scale, {
+        //   x: 3,
+        //   y: 3,
+        //   z: 3
+        // })
       }
 
     });
