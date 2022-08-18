@@ -26,13 +26,20 @@ svg {
   transition: background-color .5s, color .5s;
 }
 
+a {
+  color: var(--color-cta);
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
 :root {
   /* Light Theme Variables */
   --color-text-light: #222222;
   --color-background-light: #fff;
-  --color-primary-light: #d7d8d9;
-  --color-secondary-light: #d7d8d9;
-  --color-tertiary-light: #d7d8d9;
   --color-cta-light: #ff8c00;
 
   /* Dark Theme Variables */
@@ -44,18 +51,12 @@ svg {
 .light-theme {
   --color-text: var(--color-text-light);
   --color-background: var(--color-background-light);
-  --color-primary: var(--color-text-light);
-  --color-secondary: var(--color-text-light);
-  --color-tertiary: var(--color-text-light);
   --color-cta: var( --color-cta-light);
 }
 
 .dark-theme {
   --color-text: var(--color-text-dark);
   --color-background: var(--color-background-dark);
-  --color-primary: var(--color-text-dark);
-  --color-secondary: var(--color-text-dark);
-  --color-tertiary: var(--color-text-dark);
   --color-cta: var( --color-cta-dark);
 }
 
@@ -105,7 +106,7 @@ svg {
   width: 0.5rem;
   height: 0.5rem;
   border-radius: 50%;
-  background-color: var(--color-primary);
+  background-color: var(--color-text);
   margin: 0.25rem;
   animation: loading 1s ease-in-out infinite;
 }
@@ -247,7 +248,7 @@ svg {
   position: relative;
   width: 3.5rem;
   height: 2rem;
-  background-color: var(--color-primary);
+  background-color: var(--color-text);
   border-radius: 9999px;
   margin: 0 16px;
   border: none;
@@ -348,6 +349,11 @@ svg {
   border-top-left-radius: 43.75rem 43.75rem;
 }
 
+.fourth-section {
+  display: flex;
+  flex-direction: column;
+}
+
 /* Sections - Progress Bars */
 
 .progress-wrapper {
@@ -389,12 +395,13 @@ svg {
 }
 
 .section-image {
-  border-radius: 1rem;
+  border-radius: 0.75rem;
   width: 100%;
 }
 
 .section-heading {
-  font-size: 1.6rem;
+  font-family: FormulaCondensed-Regular, sans-serif;
+  font-size: 2rem;
   font-weight: 500;
   line-height: 1.8;
   margin-top: 4rem;
@@ -402,9 +409,9 @@ svg {
 }
 
 .section-text {
-  line-height: 1.9;
+  line-height: 1.7;
   margin-top: 18px;
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: var(--color-text);
 }
 
@@ -412,7 +419,7 @@ svg {
 
 .section-title {
   position: relative;
-  color: var(--color-primary);
+  color: var(--color-text);
 }
 
 .section-title-text {
@@ -421,35 +428,9 @@ svg {
   font-size: 3rem;
   text-transform: uppercase;
   transform-origin: left;
-  /* transform: skewY(25deg); */
   z-index: 5;
-  color: var(--color-primary);
+  color: var(--color-text);
 }
-
-/* .section-title-decoration {
-  position: absolute;
-  display: block;
-  width: 100%;
-  max-width: 16.125rem;
-  height: 3rem;
-  border: 1px solid var(--color-primary);
-  transform-origin: left;
-  transform: skewY(-25deg);
-}
-
-.section-title-decoration:first-child {
-  top: 0;
-}
-
-.section-title-decoration:nth-child(2) {
-  top: 6rem;
-}
-
-.section-title-decoration:last-child {
-  top: 6rem;
-  transform: skewY(25deg);
-  background-color: var(--color-primary);
-} */
 
 .section-number {
   position: absolute;
@@ -471,30 +452,30 @@ svg {
   margin-top: 10rem;
 }
 
-/* Section - Color Overriddes */
-
-.secondary-text {
-  color: var(--color-secondary);
+/* Footer */
+footer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  color: var(--color-text);
+  align-self: flex-end;
 }
 
-.secondary-border {
-  border-color: var(--color-secondary);
+.footer-link {
+  color: var(--color-text);
 }
 
-.secondary-background {
-  background-color: var(--color-cta);
+.socials .footer-link {
+  margin-left: 1rem;
 }
 
-.tertiary-text {
-  color: var(--color-tertiary);
-}
-
-.tertiary-border {
-  border-color: var(--color-tertiary);
-}
-
-.tertiary-background {
-  background-color: var(--color-cta);
+/* Debug */
+.debug {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999999999;
 }
 
 /* Media Queries */
@@ -571,5 +552,9 @@ svg {
 
   .hero-second-subheading {
     font-size: 1.2rem;
+  }
+
+  .socials .footer-link {
+    margin-left: 0.5rem;
   }
 }

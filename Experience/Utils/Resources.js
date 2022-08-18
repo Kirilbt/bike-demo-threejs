@@ -18,7 +18,6 @@ export default class Resources extends EventEmitter {
 
     this.setLoaders()
     this.startLoading()
-    console.log(this.items);
   }
 
   setLoaders() {
@@ -40,28 +39,28 @@ export default class Resources extends EventEmitter {
         this.loaders.cubeTextureLoader.load(asset.path, (file => {
           this.singleAssetLoaded(asset, file)
         }))
-      } else if (asset.type === 'videoTexture') {
-        this.video = {}
-        this.videoTexture = {}
+      // } else if (asset.type === 'videoTexture') {
+      //   this.video = {}
+      //   this.videoTexture = {}
 
-        this.video[asset.name] = document.createElement("video")
-        this.video[asset.name].src = asset.path
-        this.video[asset.name].playInline = true
-        this.video[asset.name].muted = true
-        this.video[asset.name].autoplay = true
-        this.video[asset.name].loop = true
-        this.video[asset.name].play()
+      //   this.video[asset.name] = document.createElement("video")
+      //   this.video[asset.name].src = asset.path
+      //   this.video[asset.name].playInline = true
+      //   this.video[asset.name].muted = true
+      //   this.video[asset.name].autoplay = true
+      //   this.video[asset.name].loop = true
+      //   this.video[asset.name].play()
 
-        this.videoTexture[asset.name] = new THREE.VideoTexture(
-          this.video[asset.name]
-        )
-        this.videoTexture[asset.name].flipY = true
-        this.videoTexture[asset.name].minFilter = THREE.NearestFilter
-        this.videoTexture[asset.name].mageFilter = THREE.NearestFilter
-        this.videoTexture[asset.name].generateMipmaps = false
-        this.videoTexture[asset.name].encoding = THREE.sRGBEncoding
+      //   this.videoTexture[asset.name] = new THREE.VideoTexture(
+      //     this.video[asset.name]
+      //   )
+      //   this.videoTexture[asset.name].flipY = true
+      //   this.videoTexture[asset.name].minFilter = THREE.NearestFilter
+      //   this.videoTexture[asset.name].mageFilter = THREE.NearestFilter
+      //   this.videoTexture[asset.name].generateMipmaps = false
+      //   this.videoTexture[asset.name].encoding = THREE.sRGBEncoding
 
-        this.singleAssetLoaded(asset, this.videoTexture[asset.name])
+      //   this.singleAssetLoaded(asset, this.videoTexture[asset.name])
       }
     }
   }

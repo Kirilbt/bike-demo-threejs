@@ -6,7 +6,7 @@ import { EventEmitter } from 'events'
 import Environment from './Environment.js'
 import Bike from './Bike.js'
 import Floor from './Floor.js'
-import Controls from '../Controls.js'
+// import Controls from '../Controls.js'
 
 
 export default class World extends EventEmitter {

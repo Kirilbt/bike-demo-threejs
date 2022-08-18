@@ -1,7 +1,5 @@
 import * as THREE from 'three'
-import { Camera } from 'three'
-import { EXRLoader } from 'three/examples/jsm/loaders/EXRLoader.js'
-import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper.js'
+import { DirectionalLightHelper } from 'three'
 import GSAP from 'gsap'
 import Experience from '../Experience.js'
 
@@ -10,6 +8,7 @@ export default class Bike {
     this.experience = new Experience()
     this.scene = this.experience.scene
     this.resources = this.experience.resources
+    this.debug = this.experience.debug
     this.bike = this.resources.items.bike
     this.actualBike = this.bike.scene
     this.bikeChildren = {}
@@ -20,14 +19,21 @@ export default class Bike {
       ease: 0.1
     }
 
-    this.setModel()
-    this.setRectAreaLight()
+    // Debug
+    if(this.debug.active) {
+      this.debugFolder = this.debug.ui.addFolder('bike')
+      this.obj = {
+        colorObj: {r:0 , g: 0, b: 0}
+      }
+    }
+
+    this.setBikeModel()
     this.setLookAtCube()
     this.onMouseMove()
     this.setBikeGroup()
   }
 
-  setModel() {
+  setBikeModel() {
     this.actualBike.scale.set(0, 0, 0)
 
     this.actualBike.traverse((child) => {
@@ -81,35 +87,35 @@ export default class Bike {
       }
 
       if(child.name === 'Frame') {
-        child.material.metalness = 1
+        child.material.metalness = 0.9
         child.material.roughness = 0
       }
 
       if(child.name === 'Chain1') {
         child.material.color.set(0x050505)
-        child.material.metalness = 1
+        child.material.metalness = 0.9
         child.material.roughness = 0
       }
 
       if(child.name === 'Chain2') {
         child.material.color.set(0x050505)
-        child.material.metalness = 1
+        child.material.metalness = 0.9
         child.material.roughness = 0
       }
 
       if(child.name === 'ChainringsCover') {
         child.material.color.set(0x050505)
-        child.material.metalness = 1
+        child.material.metalness = 0.9
         child.material.roughness = 0
       }
 
       if(child.name === 'CrankArm') {
-        child.material.metalness = 1
+        child.material.metalness = 0.9
         child.material.roughness = 0
       }
 
       if(child.name === 'Cassette') {
-        child.material.metalness = 1
+        child.material.metalness = 0.9
         child.material.roughness = 0
       }
 
@@ -171,12 +177,12 @@ export default class Bike {
       }
 
       if(child.name === 'SpokesF') {
-        child.material.metalness = 1
+        child.material.metalness = 0.9
         child.material.roughness = 0
       }
 
       if(child.name === 'SpokesB') {
-        child.material.metalness = 1
+        child.material.metalness = 0.9
         child.material.roughness = 0
       }
 
@@ -213,23 +219,6 @@ export default class Bike {
     })
   }
 
-  setRectAreaLight() {
-    const width = 1
-    const height = 1
-    const intensity = 5
-    this.rectLight = new THREE.RectAreaLight( 0xffffff, intensity,  width, height )
-    this.rectLight.position.set( 3, 1, 2 )
-    this.rectLight.rotation.y = Math.PI / 3.5
-    this.rectLight.rotation.z = Math.PI / 3.5
-    this.actualBike.add( this.rectLight )
-
-    this.bikeChildren['rectLight'] = this.rectLight
-
-    // // Rect Area Light Helper
-    // const rectLightHelper = new RectAreaLightHelper( rectLight );
-    // rectLight.add( rectLightHelper )
-  }
-
   setLookAtCube() {
     const geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5)
     const material = new THREE.MeshBasicMaterial({
@@ -246,25 +235,23 @@ export default class Bike {
 
   switchTheme(theme) {
     if(theme === 'dark') {
-      GSAP.to(this.rectLight, {
-        intensity: 2
-      })
+      this.toDarkTimeline = new GSAP.timeline()
+
       this.actualBike.traverse((child) => {
         if(child instanceof THREE.Mesh && child.material instanceof THREE.MeshStandardMaterial) {
-          GSAP.to(child.material, {
-            envMapIntensity: 0.2
-          })
+          this.toDarkTimeline.to(child.material, {
+            envMapIntensity: 0.1
+          }, 'same')
         }
       })
     } else {
-      GSAP.to(this.rectLight, {
-        intensity: 5
-      })
+      this.toLightTimeline = new GSAP.timeline()
+
       this.actualBike.traverse((child) => {
         if(child instanceof THREE.Mesh && child.material instanceof THREE.MeshStandardMaterial) {
-          GSAP.to(child.material, {
+          this.toLightTimeline.to(child.material, {
             envMapIntensity: 1
-          })
+          }, 'same')
         }
       })
     }

@@ -13,7 +13,6 @@ export default class Controls {
     this.time = this.experience.time
     this.camera = this.experience.camera
     this.actualBike = this.experience.world.bike.actualBike
-    this.group = this.experience.world.bike.group
     this.bikeChildren = this.experience.world.bike.bikeChildren
     this.lookAtCube = this.bikeChildren.lookAtCube
     this.worldPostCube = new THREE.Vector3()
@@ -21,19 +20,9 @@ export default class Controls {
       zoomValue: this.camera.perspectiveCamera.zoom
     }
     this.offSetObject = {
-      offsetZ: 0,
-      offsetY: 0
+      offsetY: 0,
+      offsetZ: 0
     }
-
-    this.actualBike.children.forEach(child => {
-      if(child.type === 'RectAreaLight') {
-        this.rectLight = child
-      }
-    })
-
-    this.circleFirst = this.experience.world.floor.circleFirst
-    this.circleSecond = this.experience.world.floor.circleSecond
-    this.circleThird = this.experience.world.floor.circleThird
 
     GSAP.registerPlugin(ScrollTrigger)
 
@@ -94,8 +83,6 @@ export default class Controls {
   reset() {
     this.actualBike.scale.set(0.65, 0.65, 0.65)
     this.actualBike.position.set(0, 0, 0)
-    this.rectLight.width = 1
-    this.rectLight.height = 1
     this.offSetObject.offsetZ = 0
     this.offSetObject.offsetY = 0
     this.camera.perspectiveCamera.position.x = 0
@@ -136,8 +123,8 @@ export default class Controls {
           y: Math.PI / 1,
         }, 'same')
         .to(this.offSetObject, {
-          offsetZ: 1.2,
-          offsetY: 0.8
+          offsetY: 0.8,
+          offsetZ: 1.2
         }, 'same')
         .to(this.camera.perspectiveCamera.position, {
           x: -5,
@@ -170,12 +157,12 @@ export default class Controls {
           y: - Math.PI / 4,
         }, 'same')
         .to(this.offSetObject, {
-          offsetZ: - 0.8,
-          offsetY: 0
+          offsetY: 0,
+          offsetZ: -0.3
         }, 'same')
         .to(this.camera.perspectiveCamera.position, {
-          y: 2,
           x: -7,
+          y: 2
         }, 'same')
         .to(this.zoom, {
           zoomValue: 3,
@@ -191,7 +178,6 @@ export default class Controls {
             trigger: '.third-move',
             start: 'top top',
             end: 'bottom bottom',
-            // markers: true,
             scrub: 0.6,
             invalidateOnRefresh: true
           }
@@ -205,8 +191,8 @@ export default class Controls {
           y: -Math.PI,
         }, 'same')
         .to(this.offSetObject, {
-          offsetZ: 1,
-          offsetY: 0.25
+          offsetY: 0.25,
+          offsetZ: 1
         }, 'same')
         .to(this.camera.perspectiveCamera.position, {
           x: -4.1,
@@ -214,6 +200,41 @@ export default class Controls {
         }, 'same')
         .to(this.zoom, {
           zoomValue: 2.5,
+          onUpdate: () => {
+            this.camera.perspectiveCamera.zoom = this.zoom.zoomValue
+            this.camera.perspectiveCamera.updateProjectionMatrix()
+          }
+        }, 'same')
+
+        // Fourth Section
+        this.fourthMoveTimeline = new GSAP.timeline({
+          scrollTrigger: {
+            trigger: '.fourth-move',
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 0.6,
+            invalidateOnRefresh: true
+          }
+        })
+        .to(this.lookAtCube.position, {
+          x: this.bikeChildren.chain1.position.x,
+          y: this.bikeChildren.chain1.position.y,
+          z: this.bikeChildren.chain1.position.z
+        }, 'same')
+        .to(this.actualBike.rotation, {
+          y: - Math.PI / 2,
+        }, 'same')
+        .to(this.offSetObject, {
+          offsetY: -0.1,
+          offsetZ: 2.7
+        }, 'same')
+        .to(this.camera.perspectiveCamera.position, {
+          x: 2,
+          y: 1,
+          z: 4
+        }, 'same')
+        .to(this.zoom, {
+          zoomValue: 1,
           onUpdate: () => {
             this.camera.perspectiveCamera.zoom = this.zoom.zoomValue
             this.camera.perspectiveCamera.updateProjectionMatrix()
@@ -229,8 +250,6 @@ export default class Controls {
         this.actualBike.scale.set(0.65, 0.65, 0.65)
         this.actualBike.rotation.set(0, -Math.PI/3 , 0)
         this.actualBike.position.set(0, 0, 0)
-        this.rectLight.width = 1 * 0.5 // !!! same increased values as actualBike
-        this.rectLight.height = 1 * 0.5 // !!! same increased values as actualBike
 
         // First Section - Mobile
         this.firstMoveTimeline = new GSAP.timeline({
@@ -394,56 +413,6 @@ export default class Controls {
             }
           })
         })
-
-        // // Circle Animations
-        // // First Section
-        // this.firstMoveTimeline = new GSAP.timeline({
-        //   scrollTrigger: {
-        //     trigger: '.first-move',
-        //     start: 'top top',
-        //     end: 'bottom bottom',
-        //     scrub: 0.6,
-        //     invalidateOnRefresh: true
-        //   }
-        // })
-        // .to(this.circleFirst.scale, {
-        //   x: 3,
-        //   y: 3,
-        //   z: 3
-        // })
-
-        // // Second Section
-        // this.secondMoveTimeline = new GSAP.timeline({
-        //   scrollTrigger: {
-        //     trigger: '.second-move',
-        //     start: 'top top',
-        //     end: 'bottom bottom',
-        //     scrub: 0.6,
-        //     invalidateOnRefresh: true
-        //   }
-        // })
-        // .to(this.circleSecond.scale, {
-        //   x: 3,
-        //   y: 3,
-        //   z: 3
-        // })
-
-        // // Third Section
-        // this.thirdMoveTimeline = new GSAP.timeline({
-        //   scrollTrigger: {
-        //     trigger: '.third-move',
-        //     start: 'top top',
-        //     end: 'bottom bottom',
-        //     // markers: true,
-        //     scrub: 0.6,
-        //     invalidateOnRefresh: true
-        //   }
-        // })
-        // .to(this.circleThird.scale, {
-        //   x: 3,
-        //   y: 3,
-        //   z: 3
-        // })
       }
 
     });
@@ -453,10 +422,10 @@ export default class Controls {
 
   update() {
     this.lookAtCube.getWorldPosition(this.worldPostCube)
-    // Offset the Camera in the z-direction of the lookAtCube
-    this.worldPostCube.z -= this.offSetObject.offsetZ
     // Offset the Camera in the y-direction of the lookAtCube
     this.worldPostCube.y -= this.offSetObject.offsetY
+    // Offset the Camera in the z-direction of the lookAtCube
+    this.worldPostCube.z -= this.offSetObject.offsetZ
 
     this.camera.perspectiveCamera.lookAt(this.worldPostCube)
 
