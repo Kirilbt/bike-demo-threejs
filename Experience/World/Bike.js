@@ -243,6 +243,10 @@ export default class Bike {
             envMapIntensity: 0.1
           }, 'same')
         }
+
+        if(child.name === 'Preloader') {
+          child.material.color.set(0x111111)
+        }
       })
     } else {
       this.toLightTimeline = new GSAP.timeline()
@@ -252,6 +256,10 @@ export default class Bike {
           this.toLightTimeline.to(child.material, {
             envMapIntensity: 1
           }, 'same')
+        }
+
+        if(child.name === 'Preloader') {
+          child.material.color.set(0xd7d8d9)
         }
       })
     }

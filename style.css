@@ -297,7 +297,7 @@ ul {
 .hero-second {
   position: absolute;
   right: 0;
-  top: 50%;
+  top: 0%;
   transform: translateY(-50%);
   color: var(--color-text);
   text-align: right;
@@ -320,6 +320,7 @@ ul {
   font-weight: 300;
   font-size: 1.6rem;
   color: var(--color-text);
+  mix-blend-mode: difference;
 }
 
 /* Sections */

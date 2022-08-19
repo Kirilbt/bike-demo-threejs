@@ -55,15 +55,20 @@ export default class Preloader extends EventEmitter {
           x: 0.5,
           y: 0.5,
           z: 0.5,
-        })
-      } else {
-        this.timeline.to(this.bikeChildren.preloader.scale, {
-          x: 0.3,
-          y: 0.3,
-          z: 0.3,
-          ease: 'back.out(2.5)',
+          ease: 'back.out(1.5)',
           duration: 0.7
         })
+      } else {
+        this.timeline.to(this.actualBike.scale, {
+          x: 0.175,
+          y: 0.175,
+          z: 0.175,
+          ease: 'back.out(2.5)',
+          duration: 0.7
+        }, 'same')
+        .to(this.camera.perspectiveCamera.position, {
+          y: 0.1
+        }, 'same')
       }
 
       this.timeline.to('.intro-text .animatethis', {
@@ -94,17 +99,35 @@ export default class Preloader extends EventEmitter {
       .to('.arrow-svg-wrapper', {
         opacity: 0
       }, 'fadeout')
-      .to(this.actualBike.rotation, {
-        y: 2 * Math.PI
-      }, 'same')
-      .to(this.actualBike.scale, {
-        x: 0.65,
-        y: 0.65,
-        z: 0.65,
-        stagger: 2,
-        ease: 'power1.out'
-      })
-      .to(this.bikeChildren.preloader.scale, {
+
+      if (this.device === 'desktop') {
+        this.secondTimeline.to(this.actualBike.scale, {
+          x: 0.65,
+          y: 0.65,
+          z: 0.65,
+          stagger: 2,
+          ease: 'power1.out'
+        })
+        .to(this.actualBike.rotation, {
+          y: 2 * Math.PI
+        })
+      } else {
+        this.secondTimeline.to(this.actualBike.scale, {
+          x: 0.50,
+          y: 0.50,
+          z: 0.50,
+          stagger: 2,
+          ease: 'power1.out'
+        })
+        .to(this.actualBike.rotation, {
+          y: -Math.PI * 2.5
+        }, 'same')
+        .to(this.camera.perspectiveCamera.position, {
+          y: 0.3
+        }, 'same')
+      }
+
+      this.secondTimeline.to(this.bikeChildren.preloader.scale, {
         x: 0,
         y: 0,
         z: 0,
@@ -191,18 +214,18 @@ export default class Preloader extends EventEmitter {
   }
 
   move() {
-    // if(this.device === 'desktop') {
-    //   this.group.position.set(-1, 0, 0) // same values as provided to gsap
-    // } else {
-    //   this.group.position.set(0, 0, -1) // same values as provided to gsap
-    // }
+    if(this.device === 'desktop') {
+      this.group.position.set(0, 0, 0) // same values as provided to gsap
+    } else {
+      this.group.position.set(0, 0, 0) // same values as provided to gsap
+    }
   }
 
   scale() {
     if(this.device === 'desktop') {
       this.group.scale.set(1, 1, 1) // same values as provided to gsap
     } else {
-      this.group.scale.set(0.65, 0.65, 0.65) // same values as provided to gsap
+      this.group.scale.set(1, 1, 1) // same values as provided to gsap
     }
   }
 

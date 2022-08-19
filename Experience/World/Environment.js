@@ -64,10 +64,10 @@ export default class Environment {
     this.directionalLight2 = new THREE.DirectionalLight( color, intensity )
     this.directionalLight2.position.set( -2, 2, 3 )
     this.directionalLight2.target = targetObject;
-    this.directionalLight2.castShadow = true
-    this.directionalLight2.shadow.camera.far = 20
-    this.directionalLight2.shadow.mapSize.set(1024, 1024)
-    this.directionalLight2.shadow.normalBias = 0.05
+    // this.directionalLight2.castShadow = true
+    // this.directionalLight2.shadow.camera.far = 20
+    // this.directionalLight2.shadow.mapSize.set(1024, 1024)
+    // this.directionalLight2.shadow.normalBias = 0.05
     this.scene.add( this.directionalLight2 )
 
     this.directionalLight3 = new THREE.DirectionalLight( color, intensity )
@@ -77,7 +77,6 @@ export default class Environment {
     this.directionalLight3.shadow.camera.far = 20
     this.directionalLight3.shadow.mapSize.set(1024, 1024)
     this.directionalLight3.shadow.normalBias = 0.05
-
     this.scene.add( this.directionalLight3 )
 
     // // Directional Light Helpers

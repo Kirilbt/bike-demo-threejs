@@ -83,15 +83,30 @@ export default class Controls {
   reset() {
     this.actualBike.scale.set(0.65, 0.65, 0.65)
     this.actualBike.position.set(0, 0, 0)
-    this.offSetObject.offsetZ = 0
-    this.offSetObject.offsetY = 0
+    this.actualBike.rotation.y = 0
     this.camera.perspectiveCamera.position.x = 0
     this.camera.perspectiveCamera.position.y = 0.5
     this.camera.perspectiveCamera.position.z = 4
     this.camera.perspectiveCamera.zoom = 1
     this.lookAtCube.position.set(0, 1, 0)
     this.worldPostCube.set(0, 0.65, 0)
-    this.actualBike.rotation.y = 0
+    this.offSetObject.offsetZ = 0
+    this.offSetObject.offsetY = 0
+    this.zoom.zoomValue = 1
+  }
+
+  resetMobile() {
+    this.actualBike.scale.set(0.5, 0.5, 0.5)
+    this.actualBike.rotation.set(0, -Math.PI/2 , 0)
+    this.actualBike.position.set(0, 0, 0)
+    this.camera.perspectiveCamera.position.x = 0
+    this.camera.perspectiveCamera.position.y = 0.3
+    this.camera.perspectiveCamera.position.z = 4
+    this.camera.perspectiveCamera.zoom = 1
+    this.lookAtCube.position.set(0, 1, 0)
+    this.worldPostCube.set(0, 0.65, 0)
+    this.offSetObject.offsetZ = 0
+    this.offSetObject.offsetY = 0.05
     this.zoom.zoomValue = 1
   }
 
@@ -247,9 +262,7 @@ export default class Controls {
         console.log('fired mobile')
 
         // Resets
-        this.actualBike.scale.set(0.65, 0.65, 0.65)
-        this.actualBike.rotation.set(0, -Math.PI/3 , 0)
-        this.actualBike.position.set(0, 0, 0)
+        this.resetMobile()
 
         // First Section - Mobile
         this.firstMoveTimeline = new GSAP.timeline({
@@ -270,15 +283,15 @@ export default class Controls {
           y: Math.PI / 1,
         }, 'same')
         .to(this.offSetObject, {
-          offsetZ: 0.075,
-          offsetY: 0.25
+          offsetY: 0.5,
+          offsetZ: 0.15
         }, 'same')
         .to(this.camera.perspectiveCamera.position, {
           x: -5,
           y: 3
         }, 'same')
         .to(this.zoom, {
-          zoomValue: 3,
+          zoomValue: 2.3,
           onUpdate: () => {
             this.camera.perspectiveCamera.zoom = this.zoom.zoomValue
             this.camera.perspectiveCamera.updateProjectionMatrix()
@@ -304,15 +317,15 @@ export default class Controls {
           y: - Math.PI / 4,
         }, 'same')
         .to(this.offSetObject, {
-          offsetZ: 0.025,
-          offsetY: 0
+          offsetY: 0.23,
+          offsetZ: 0.35
         }, 'same')
         .to(this.camera.perspectiveCamera.position, {
-          y: 2,
           x: -7,
+          y: 2
         }, 'same')
         .to(this.zoom, {
-          zoomValue: 4,
+          zoomValue: 2.5,
           onUpdate: () => {
             this.camera.perspectiveCamera.zoom = this.zoom.zoomValue
             this.camera.perspectiveCamera.updateProjectionMatrix()
@@ -339,7 +352,8 @@ export default class Controls {
           y: -Math.PI,
         }, 'same')
         .to(this.offSetObject, {
-          offsetY: 0.125
+          offsetY: 0.125,
+          offsetZ: -0.0375
         }, 'same')
         .to(this.camera.perspectiveCamera.position, {
           x: -4.1,
@@ -347,6 +361,41 @@ export default class Controls {
         }, 'same')
         .to(this.zoom, {
           zoomValue: 3.5,
+          onUpdate: () => {
+            this.camera.perspectiveCamera.zoom = this.zoom.zoomValue
+            this.camera.perspectiveCamera.updateProjectionMatrix()
+          }
+        }, 'same')
+
+        // Fourth Section - Mobile
+        this.fourthMoveTimeline = new GSAP.timeline({
+          scrollTrigger: {
+            trigger: '.fourth-move',
+            start: 'top top',
+            end: 'bottom bottom',
+            // markers: true,
+            scrub: 0.6,
+            invalidateOnRefresh: true
+          }
+        })
+        .to(this.lookAtCube.position, {
+          x: this.bikeChildren.chain1.position.x,
+          y: this.bikeChildren.chain1.position.y,
+          z: this.bikeChildren.chain1.position.z
+        }, 'same')
+        .to(this.actualBike.rotation, {
+          y: -Math.PI/1.5,
+        }, 'same')
+        .to(this.offSetObject, {
+          offsetY: 0.125,
+          offsetZ: -0.25
+        }, 'same')
+        .to(this.camera.perspectiveCamera.position, {
+          x: -4.1,
+          y: 0.5,
+        }, 'same')
+        .to(this.zoom, {
+          zoomValue: 1.5,
           onUpdate: () => {
             this.camera.perspectiveCamera.zoom = this.zoom.zoomValue
             this.camera.perspectiveCamera.updateProjectionMatrix()
@@ -429,7 +478,7 @@ export default class Controls {
 
     this.camera.perspectiveCamera.lookAt(this.worldPostCube)
 
-    // Only look at the original location of the lookAtCube
+    // // Only look at the original location of the lookAtCube
     // this.camera.perspectiveCamera.lookAt(this.lookAtCube.position)
   }
 }
