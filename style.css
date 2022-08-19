@@ -297,7 +297,7 @@ ul {
 .hero-second {
   position: absolute;
   right: 0;
-  top: 0%;
+  top: 25%;
   transform: translateY(-50%);
   color: var(--color-text);
   text-align: right;
