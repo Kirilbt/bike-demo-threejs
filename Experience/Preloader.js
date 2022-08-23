@@ -35,7 +35,6 @@ export default class Preloader extends EventEmitter {
     this.group = this.experience.world.bike.group
     this.actualBike = this.experience.world.bike.actualBike
     this.bikeChildren = this.experience.world.bike.bikeChildren
-    this.lookAtCube = this.bikeChildren.lookAtCube
   }
 
   firstIntro() {
@@ -107,31 +106,46 @@ export default class Preloader extends EventEmitter {
           z: 0.65,
           stagger: 2,
           ease: 'power1.out'
-        })
-        .to(this.actualBike.rotation, {
-          y: 2 * Math.PI
-        })
+        }, 'introtext')
       } else {
         this.secondTimeline.to(this.actualBike.scale, {
           x: 0.50,
           y: 0.50,
           z: 0.50,
-          stagger: 2,
+          stagger: 1,
           ease: 'power1.out'
-        })
+        }, 'introtext')
         .to(this.actualBike.rotation, {
-          y: -Math.PI * 2.5
-        }, 'same')
+          y: -Math.PI * 0.5
+        }, 'introtext')
         .to(this.camera.perspectiveCamera.position, {
-          y: 0.3
-        }, 'same')
+          y: 0.4
+        }, 'introtext')
       }
 
-      this.secondTimeline.to(this.bikeChildren.preloader.scale, {
+      this.secondTimeline.to(this.bikeChildren.boxface1.rotation, {
         x: 0,
         y: 0,
+        z: -Math.PI,
+        duration: 2
+      }, 'introtext')
+      .to(this.bikeChildren.boxface2.rotation, {
+        x: -Math.PI,
+        y: 0,
         z: 0,
-        duration: 1
+        duration: 2
+      }, 'introtext')
+      .to(this.bikeChildren.boxface3.rotation, {
+        x: Math.PI,
+        y: 0,
+        z: 0,
+        duration: 2
+      }, 'introtext')
+      .to(this.bikeChildren.boxface4.rotation, {
+        x: 0,
+        y: 0,
+        z: Math.PI,
+        duration: 2
       }, 'introtext')
       .to('.hero-main-title .animatethis', {
         yPercent: 0,

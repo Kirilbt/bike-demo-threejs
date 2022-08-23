@@ -49,7 +49,19 @@ export default class Bike {
         child.material = this.bikeMaterial
       }
 
-      if(child.name === 'Preloader') {
+      if(child.name === 'BoxFace1') {
+        child.material.side = THREE.BackSide
+        child.material.color.set(0x111111)
+      }
+      if(child.name === 'BoxFace2') {
+        child.material.side = THREE.BackSide
+        child.material.color.set(0x111111)
+      }
+      if(child.name === 'BoxFace3') {
+        child.material.side = THREE.BackSide
+        child.material.color.set(0x111111)
+      }
+      if(child.name === 'BoxFace4') {
         child.material.side = THREE.BackSide
         child.material.color.set(0x111111)
       }
@@ -254,7 +266,7 @@ export default class Bike {
   onMouseMove() {
     window.addEventListener('mousemove', (e) => {
       this.rotation = ((e.clientX - window.innerWidth / 2) * 2) / window.innerWidth // makes the position of the cursor from -1 to 1
-      this.lerp.target = this.rotation * 0.5
+      this.lerp.target = this.rotation * 0.3
     })
   }
 

@@ -93,7 +93,7 @@ export default class Controls {
     this.actualBike.rotation.set(0, -Math.PI/2 , 0)
     this.actualBike.position.set(0, 0, 0)
     this.camera.perspectiveCamera.position.x = 0
-    this.camera.perspectiveCamera.position.y = 0.3
+    this.camera.perspectiveCamera.position.y = 0.4
     this.camera.perspectiveCamera.position.z = 4
     this.camera.perspectiveCamera.zoom = 1
     this.zoom.zoomValue = 1
@@ -273,7 +273,7 @@ export default class Controls {
         }, "same")
         .fromTo(this.camera.perspectiveCamera.position, {
           x: 0,
-          y: 0.3,
+          y: 0.4,
           z: 4,
         },
         {
