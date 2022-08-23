@@ -25,14 +25,14 @@ export default class Environment {
   }
 
   setBackground() {
-    this.bgColor = 0xd7d8d9
+    this.bgColor = 0x222222
     this.scene.background = new THREE.Color(this.bgColor)
     this.scene.fog = new THREE.Fog(this.bgColor, 5, 20)
   }
 
   setLights() {
     // Sun Light
-    this.sunLight = new THREE.DirectionalLight("#ffffff", 3)
+    this.sunLight = new THREE.DirectionalLight("#222222", 0.2)
     this.sunLight.castShadow = true
     this.sunLight.shadow.camera.far = 20
     this.sunLight.shadow.mapSize.set(1024, 1024)
@@ -45,12 +45,12 @@ export default class Environment {
     // this.scene.add(this.sunLightHelper)
 
     // Ambient Light
-    this.ambientLight = new THREE.AmbientLight('#ffffff', 1)
+    this.ambientLight = new THREE.AmbientLight('#222222', 0.2)
     this.scene.add(this.ambientLight)
 
     // Directional Light
     const color = 0xffffff
-    const intensity = 0
+    const intensity = 1
 
     const targetObject = new THREE.Object3D();
     targetObject.position.set(0, 0.5, 0)
@@ -64,10 +64,6 @@ export default class Environment {
     this.directionalLight2 = new THREE.DirectionalLight( color, intensity )
     this.directionalLight2.position.set( -2, 2, 3 )
     this.directionalLight2.target = targetObject;
-    // this.directionalLight2.castShadow = true
-    // this.directionalLight2.shadow.camera.far = 20
-    // this.directionalLight2.shadow.mapSize.set(1024, 1024)
-    // this.directionalLight2.shadow.normalBias = 0.05
     this.scene.add( this.directionalLight2 )
 
     this.directionalLight3 = new THREE.DirectionalLight( color, intensity )
@@ -413,9 +409,5 @@ export default class Environment {
 
   resize() {}
 
-  update() {
-    // this.directionalLightHelper.update()
-    // this.directionalLightHelper2.update()
-    // this.directionalLightHelper3.update()
-  }
+  update() {}
 }

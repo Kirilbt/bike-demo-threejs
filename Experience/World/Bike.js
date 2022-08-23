@@ -44,13 +44,14 @@ export default class Bike {
         // Material
         this.bikeMaterial = new THREE.MeshStandardMaterial({
           color: 0xd7d8d9,
-          envMapIntensity: 1
+          envMapIntensity: 0.1
         })
         child.material = this.bikeMaterial
       }
 
       if(child.name === 'Preloader') {
         child.material.side = THREE.BackSide
+        child.material.color.set(0x111111)
       }
 
       if(child.name === 'BrakeF') {

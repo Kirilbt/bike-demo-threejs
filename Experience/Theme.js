@@ -4,7 +4,7 @@ export default class Theme extends EventEmitter {
   constructor() {
     super()
 
-    this.theme = 'light'
+    this.theme = 'dark'
 
     this.toggleButton = document.querySelector('.toggle-button')
     this.toggleCircle = document.querySelector('.toggle-circle')
@@ -15,7 +15,7 @@ export default class Theme extends EventEmitter {
   setEventListeners() {
     this.toggleButton.addEventListener('click', () => {
       this.toggleCircle.classList.toggle('slide')
-      this.theme = this.theme === 'light' ? 'dark' : 'light'
+      this.theme = this.theme === 'dark' ? 'light' : 'dark'
       document.body.classList.toggle('dark-theme')
       document.body.classList.toggle('light-theme')
 

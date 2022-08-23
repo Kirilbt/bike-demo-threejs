@@ -258,7 +258,7 @@ ul {
 
 .toggle-circle {
   position: absolute;
-  left: 0.5rem;
+  right: 0.5rem;
   border-radius: 50%;
   width: 1.5rem;
   height: 1.5rem;
@@ -271,7 +271,7 @@ ul {
 }
 
 .slide {
-  left: 1.6rem;
+  right: 1.6rem;
 }
 
 /* Hero Section */
@@ -285,7 +285,6 @@ ul {
   position: relative;
   height: 100%;
   width: calc(100% - 10rem);
-  /* max-width: 100rem; */
   margin: 0 auto;
 }
 
@@ -356,33 +355,6 @@ ul {
   flex-direction: column;
 }
 
-/* Sections - Progress Bars */
-
-.progress-wrapper {
-  height: 0;
-  width: 0.25rem;
-  z-index: 9999;
-}
-
-.progress-bar-wrapper-left {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.progress-bar-wrapper-right {
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-
-.progress-bar {
-  height: 100vh;
-  width: 100%;
-  background-color: var(--color-cta);
-  transform-origin: top center;
-  transform: scaleY(1);
-}
 
 .section-intro-wrapper {
   position: relative;
@@ -442,19 +414,36 @@ ul {
   color: var(--color-text);
 }
 
-.section-button {
-  padding: 1rem 1.5rem;
-  border: none;
-  border-radius: 500px;
-  border: 1px solid var(--color-text);
-  color: var(--color-text);
-  background-color: var(--color-background);
-  font-size: 1.2rem;
-  cursor: pointer;
-  margin-top: 10rem;
+/* Sections - Progress Bars */
+
+.progress-wrapper {
+  height: 0;
+  width: 0.25rem;
+  z-index: 9999;
+}
+
+.progress-bar-wrapper-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.progress-bar-wrapper-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.progress-bar {
+  height: 100vh;
+  width: 100%;
+  background-color: var(--color-cta);
+  transform-origin: top center;
+  transform: scaleY(1);
 }
 
 /* Footer */
+
 footer {
   display: flex;
   justify-content: space-between;
@@ -472,6 +461,7 @@ footer {
 }
 
 /* Debug */
+
 .debug {
   position: absolute;
   top: 0;
