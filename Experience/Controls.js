@@ -14,21 +14,18 @@ export default class Controls {
     this.camera = this.experience.camera
     this.actualBike = this.experience.world.bike.actualBike
     this.bikeChildren = this.experience.world.bike.bikeChildren
-    this.lookAtCube = this.bikeChildren.lookAtCube
-    this.worldPostCube = new THREE.Vector3()
     this.zoom = {
       zoomValue: this.camera.perspectiveCamera.zoom
-    }
-    this.offSetObject = {
-      offsetY: 0,
-      offsetZ: 0
     }
 
     GSAP.registerPlugin(ScrollTrigger)
 
     document.querySelector('.page').style.overflow = 'visible'
 
-    this.setSmoothScroll()
+    if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      console.log("desktop")
+      this.setSmoothScroll()
+    }
     this.setScrollTrigger()
   }
 
@@ -88,10 +85,6 @@ export default class Controls {
     this.camera.perspectiveCamera.position.y = 0.5
     this.camera.perspectiveCamera.position.z = 4
     this.camera.perspectiveCamera.zoom = 1
-    this.lookAtCube.position.set(0, 1, 0)
-    this.worldPostCube.set(0, 0.65, 0)
-    this.offSetObject.offsetZ = 0
-    this.offSetObject.offsetY = 0
     this.zoom.zoomValue = 1
   }
 
@@ -103,10 +96,6 @@ export default class Controls {
     this.camera.perspectiveCamera.position.y = 0.3
     this.camera.perspectiveCamera.position.z = 4
     this.camera.perspectiveCamera.zoom = 1
-    this.lookAtCube.position.set(0, 1, 0)
-    this.worldPostCube.set(0, 0.65, 0)
-    this.offSetObject.offsetZ = 0
-    this.offSetObject.offsetY = 0.05
     this.zoom.zoomValue = 1
   }
 
@@ -114,7 +103,6 @@ export default class Controls {
     ScrollTrigger.matchMedia({
       // Desktop
       "(min-width: 969px)": () => {
-        console.log('fired desktop');
 
         // Resets
         this.reset()
@@ -129,137 +117,140 @@ export default class Controls {
             invalidateOnRefresh: true
           }
         })
-        .to(this.lookAtCube.position, {
-          x: this.bikeChildren.cockpit.position.x,
-          y: this.bikeChildren.cockpit.position.y,
-          z: this.bikeChildren.cockpit.position.z
-        }, 'same')
-        .to(this.actualBike.rotation, {
-          y: Math.PI / 1,
-        }, 'same')
-        .to(this.offSetObject, {
-          offsetY: 0.8,
-          offsetZ: 1.2
-        }, 'same')
-        .to(this.camera.perspectiveCamera.position, {
-          x: -5,
-          y: 6
-        }, 'same')
-        .to(this.zoom, {
-          zoomValue: 3,
-          onUpdate: () => {
-              this.camera.perspectiveCamera.zoom = this.zoom.zoomValue
-              this.camera.perspectiveCamera.updateProjectionMatrix()
-          },
-        }, 'same')
-
-        // Second Section
-        this.secondMoveTimeline = new GSAP.timeline({
-          scrollTrigger: {
-            trigger: '.second-move',
-            start: 'top top',
-            end: 'bottom bottom',
-            scrub: 0.6,
-            invalidateOnRefresh: true
-          }
-        })
-        .to(this.lookAtCube.position, {
-          x: this.bikeChildren.chain1.position.x,
-          y: this.bikeChildren.chain1.position.y,
-          z: this.bikeChildren.chain1.position.z
-        }, 'same')
-        .to(this.actualBike.rotation, {
-          y: - Math.PI / 4,
-        }, 'same')
-        .to(this.offSetObject, {
-          offsetY: 0,
-          offsetZ: -0.3
-        }, 'same')
-        .to(this.camera.perspectiveCamera.position, {
-          x: -7,
-          y: 2
-        }, 'same')
-        .to(this.zoom, {
-          zoomValue: 3,
-          onUpdate: () => {
-            this.camera.perspectiveCamera.zoom = this.zoom.zoomValue
-            this.camera.perspectiveCamera.updateProjectionMatrix()
-          }
-        }, 'same')
-
-        // Third Section
-        this.thirdMoveTimeline = new GSAP.timeline({
-          scrollTrigger: {
-            trigger: '.third-move',
-            start: 'top top',
-            end: 'bottom bottom',
-            scrub: 0.6,
-            invalidateOnRefresh: true
-          }
-        })
-        .to(this.lookAtCube.position, {
-          x: this.bikeChildren.seat.position.x,
-          y: this.bikeChildren.seat.position.y,
-          z: this.bikeChildren.seat.position.z
-        }, 'same')
-        .to(this.actualBike.rotation, {
-          y: -Math.PI,
-        }, 'same')
-        .to(this.offSetObject, {
-          offsetY: 0.25,
-          offsetZ: 1
-        }, 'same')
-        .to(this.camera.perspectiveCamera.position, {
-          x: -4.1,
-          y: 3,
-        }, 'same')
-        .to(this.zoom, {
-          zoomValue: 2.5,
-          onUpdate: () => {
-            this.camera.perspectiveCamera.zoom = this.zoom.zoomValue
-            this.camera.perspectiveCamera.updateProjectionMatrix()
-          }
-        }, 'same')
-
-        // Fourth Section
-        this.fourthMoveTimeline = new GSAP.timeline({
-          scrollTrigger: {
-            trigger: '.fourth-move',
-            start: 'top top',
-            end: 'bottom bottom',
-            scrub: 0.6,
-            invalidateOnRefresh: true
-          }
-        })
-        .to(this.lookAtCube.position, {
-          x: this.bikeChildren.chain1.position.x,
-          y: this.bikeChildren.chain1.position.y,
-          z: this.bikeChildren.chain1.position.z
-        }, 'same')
-        .to(this.actualBike.rotation, {
-          y: - Math.PI / 2,
-        }, 'same')
-        .to(this.offSetObject, {
-          offsetY: -0.1,
-          offsetZ: 2.7
-        }, 'same')
-        .to(this.camera.perspectiveCamera.position, {
-          x: 2,
-          y: 1,
+        .fromTo(this.actualBike.rotation, {
+          y: 0
+        },
+        {
+          y: Math.PI
+        }, "same")
+        .fromTo(this.camera.perspectiveCamera.position, {
+          x: 0,
+          y: 0.5,
           z: 4
-        }, 'same')
-        .to(this.zoom, {
+        },
+        {
+          x: -5,
+          y: 6,
+        }, "same")
+        .fromTo(this.camera.perspectiveCamera.rotation, {
+          x: 0.0374824366916615,
+          y: 0,
+          z: -0
+        },
+        {
+          x: -0.81,
+          y: -0.5324252706006514,
+          z: -0.45011986145587835
+        }, "same")
+        .fromTo(this.zoom, {
           zoomValue: 1,
           onUpdate: () => {
             this.camera.perspectiveCamera.zoom = this.zoom.zoomValue
             this.camera.perspectiveCamera.updateProjectionMatrix()
           }
-        }, 'same')
+        },
+        {
+          zoomValue: 3,
+          onUpdate: () => {
+            this.camera.perspectiveCamera.zoom = this.zoom.zoomValue
+            this.camera.perspectiveCamera.updateProjectionMatrix()
+          }
+        }, "same")
+
+        // Second Section
+        this.secondMoveTimeline = new GSAP.timeline({
+          scrollTrigger: {
+            trigger: ".second-move",
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 0.6,
+            invalidateOnRefresh: true,
+          },
+        })
+        .to(this.actualBike.rotation, {
+          y: -Math.PI / 4,
+        }, "same")
+        .to(this.camera.perspectiveCamera.position, {
+          x: -7,
+          y: 2,
+        }, "same")
+        .to(this.camera.perspectiveCamera.rotation, {
+          x: -0.3340156231020234,
+          y: -1.0505564481189775,
+          z: -0.2924724024454449,
+        }, "same")
+        .to(this.zoom, {
+          zoomValue: 3,
+          onUpdate: () => {
+            this.camera.perspectiveCamera.zoom = this.zoom.zoomValue;
+            this.camera.perspectiveCamera.updateProjectionMatrix();
+          },
+        }, "same")
+
+        // Third Section
+        this.thirdMoveTimeline = new GSAP.timeline({
+          scrollTrigger: {
+            trigger: ".third-move",
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 0.6,
+            invalidateOnRefresh: true
+          },
+        })
+        .to(this.actualBike.rotation, {
+          y: -Math.PI,
+        }, "same")
+        .to(this.camera.perspectiveCamera.position, {
+          x: -4.1,
+          y: 3
+        }, "same")
+        .to(this.camera.perspectiveCamera.rotation, {
+          x: -0.33669463959268153,
+          y: -0.700986700755924,
+          z: -0.22203253193071731,
+        }, "same")
+        .to(this.zoom, {
+          zoomValue: 2.5,
+          onUpdate: () => {
+            this.camera.perspectiveCamera.zoom = this.zoom.zoomValue
+            this.camera.perspectiveCamera.updateProjectionMatrix()
+          },
+        }, "same")
+
+        // Fourth Section
+        this.fourthMoveTimeline = new GSAP.timeline({
+          scrollTrigger: {
+              trigger: ".fourth-move",
+              start: "top top",
+              end: "bottom bottom",
+              scrub: 0.6,
+              invalidateOnRefresh: true
+          }
+        })
+        .to(this.actualBike.rotation, {
+          y: -Math.PI / 2,
+        }, "same")
+        .to(this.camera.perspectiveCamera.position, {
+          x: 2,
+          y: 1,
+          z: 4,
+        }, "same")
+        .to(this.camera.perspectiveCamera.rotation, {
+          x: -0.02845135092188762,
+          y: 0.29416856071633857,
+          z: 0.008251344278639
+        }, "same")
+        .to(this.zoom, {
+          zoomValue: 1,
+          onUpdate: () => {
+            this.camera.perspectiveCamera.zoom = this.zoom.zoomValue
+            this.camera.perspectiveCamera.updateProjectionMatrix()
+          },
+        }, "same")
       },
 
       // Mobile
       "(max-width: 968px)": () => {
-        console.log('fired mobile')
 
         // Resets
         this.resetMobile()
@@ -274,29 +265,46 @@ export default class Controls {
             invalidateOnRefresh: true
           }
         })
-        .to(this.lookAtCube.position, {
-          x: this.bikeChildren.cockpit.position.x,
-          y: this.bikeChildren.cockpit.position.y,
-          z: this.bikeChildren.cockpit.position.z
-        }, 'same')
-        .to(this.actualBike.rotation, {
-          y: Math.PI / 1,
-        }, 'same')
-        .to(this.offSetObject, {
-          offsetY: 0.5,
-          offsetZ: 0.15
-        }, 'same')
-        .to(this.camera.perspectiveCamera.position, {
-          x: -5,
-          y: 3
-        }, 'same')
-        .to(this.zoom, {
+        .fromTo(this.actualBike.rotation, {
+          y: -Math.PI / 2
+        },
+        {
+            y: Math.PI / 1,
+        }, "same")
+        .fromTo(this.camera.perspectiveCamera.position, {
+          x: 0,
+          y: 0.3,
+          z: 4,
+        },
+        {
+          x: -4.82,
+          y: 3,
+          z: 4,
+        }, "same")
+        .fromTo(this.camera.perspectiveCamera.rotation, {
+          x: 0.0374824366916615,
+          y: 0,
+          z: -0
+        },
+        {
+          x: -0.4826867099146418,
+          y: -0.7487373908008822,
+          z: -0.3426445418872183
+        }, "same")
+        .fromTo(this.zoom, {
+          zoomValue: 1,
+          onUpdate: () => {
+            this.camera.perspectiveCamera.zoom = this.zoom.zoomValue
+            this.camera.perspectiveCamera.updateProjectionMatrix()
+          }
+        },
+        {
           zoomValue: 2.3,
           onUpdate: () => {
             this.camera.perspectiveCamera.zoom = this.zoom.zoomValue
             this.camera.perspectiveCamera.updateProjectionMatrix()
           }
-        }, 'same')
+        }, "same")
 
         // Second Section - Mobile
         this.secondMoveTimeline = new GSAP.timeline({
@@ -308,29 +316,25 @@ export default class Controls {
             invalidateOnRefresh: true
           }
         })
-        .to(this.lookAtCube.position, {
-          x: this.bikeChildren.chain1.position.x,
-          y: this.bikeChildren.chain1.position.y,
-          z: this.bikeChildren.chain1.position.z
-        }, 'same')
         .to(this.actualBike.rotation, {
-          y: - Math.PI / 4,
-        }, 'same')
-        .to(this.offSetObject, {
-          offsetY: 0.23,
-          offsetZ: 0.35
-        }, 'same')
+          y: -Math.PI / 4,
+        }, "same")
         .to(this.camera.perspectiveCamera.position, {
           x: -7,
           y: 2
-        }, 'same')
+        }, "same")
+        .to(this.camera.perspectiveCamera.rotation, {
+          x: -0.36830437274233147,
+          y: -0.975248930241726,
+          z: -0.30922701986576173,
+        }, "same")
         .to(this.zoom, {
           zoomValue: 2.5,
           onUpdate: () => {
             this.camera.perspectiveCamera.zoom = this.zoom.zoomValue
             this.camera.perspectiveCamera.updateProjectionMatrix()
           }
-        }, 'same')
+        }, "same")
 
         // Third Section - Mobile
         this.thirdMoveTimeline = new GSAP.timeline({
@@ -343,29 +347,25 @@ export default class Controls {
             invalidateOnRefresh: true
           }
         })
-        .to(this.lookAtCube.position, {
-          x: this.bikeChildren.seat.position.x,
-          y: this.bikeChildren.seat.position.y,
-          z: this.bikeChildren.seat.position.z
-        }, 'same')
         .to(this.actualBike.rotation, {
           y: -Math.PI,
-        }, 'same')
-        .to(this.offSetObject, {
-          offsetY: 0.125,
-          offsetZ: -0.0375
-        }, 'same')
+        }, "same")
         .to(this.camera.perspectiveCamera.position, {
-          x: -4.1,
-          y: 2,
-        }, 'same')
+          x: -4.15,
+          y: 1.7,
+        }, "same")
+        .to(this.camera.perspectiveCamera.rotation, {
+          x: -0.15,
+          y: -0.82433683382151,
+          z: -0.17595910659449646,
+        }, "same")
         .to(this.zoom, {
           zoomValue: 3.5,
           onUpdate: () => {
             this.camera.perspectiveCamera.zoom = this.zoom.zoomValue
             this.camera.perspectiveCamera.updateProjectionMatrix()
           }
-        }, 'same')
+        }, "same")
 
         // Fourth Section - Mobile
         this.fourthMoveTimeline = new GSAP.timeline({
@@ -378,29 +378,25 @@ export default class Controls {
             invalidateOnRefresh: true
           }
         })
-        .to(this.lookAtCube.position, {
-          x: this.bikeChildren.chain1.position.x,
-          y: this.bikeChildren.chain1.position.y,
-          z: this.bikeChildren.chain1.position.z
-        }, 'same')
         .to(this.actualBike.rotation, {
-          y: -Math.PI/1.5,
-        }, 'same')
-        .to(this.offSetObject, {
-          offsetY: 0.125,
-          offsetZ: -0.25
-        }, 'same')
+          y: -Math.PI / 1.5,
+        }, "same")
         .to(this.camera.perspectiveCamera.position, {
           x: -4.1,
           y: 0.5,
-        }, 'same')
+        }, "same")
         .to(this.zoom, {
           zoomValue: 1.5,
           onUpdate: () => {
-            this.camera.perspectiveCamera.zoom = this.zoom.zoomValue
-            this.camera.perspectiveCamera.updateProjectionMatrix()
+              this.camera.perspectiveCamera.zoom = this.zoom.zoomValue
+              this.camera.perspectiveCamera.updateProjectionMatrix()
           }
-        }, 'same')
+        }, "same")
+        .to(this.camera.perspectiveCamera.rotation, {
+          x: -0.0212333950806064,
+          y: -0.81785674319681,
+          z: -0.015494714435393457,
+        }, "same")
       },
 
       // all
@@ -469,16 +465,5 @@ export default class Controls {
 
   resize() {}
 
-  update() {
-    this.lookAtCube.getWorldPosition(this.worldPostCube)
-    // Offset the Camera in the y-direction of the lookAtCube
-    this.worldPostCube.y -= this.offSetObject.offsetY
-    // Offset the Camera in the z-direction of the lookAtCube
-    this.worldPostCube.z -= this.offSetObject.offsetZ
-
-    this.camera.perspectiveCamera.lookAt(this.worldPostCube)
-
-    // // Only look at the original location of the lookAtCube
-    // this.camera.perspectiveCamera.lookAt(this.lookAtCube.position)
-  }
+  update() {}
 }

@@ -28,7 +28,6 @@ export default class Bike {
     }
 
     this.setBikeModel()
-    this.setLookAtCube()
     this.onMouseMove()
     this.setBikeGroup()
   }
@@ -217,20 +216,6 @@ export default class Bike {
 
       this.bikeChildren[child.name.toLowerCase()] = child
     })
-  }
-
-  setLookAtCube() {
-    const geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5)
-    const material = new THREE.MeshBasicMaterial({
-      color: 0xff0000,
-      wireframe: true
-    })
-    this.lookAtCube = new THREE.Mesh(geometry, material)
-    this.lookAtCube.material.visible = false // Make it Invisible
-    this.lookAtCube.position.y = 1
-    this.actualBike.add(this.lookAtCube)
-
-    this.bikeChildren['lookAtCube'] = this.lookAtCube
   }
 
   switchTheme(theme) {

@@ -18,6 +18,11 @@ html, body {
   font-weight: 400;
 }
 
+body {
+  background: var(--color-body-background);
+  transition: background-color 0.325s ease-in;
+}
+
 h1,
 section,
 p,
@@ -40,23 +45,27 @@ ul {
   /* Light Theme Variables */
   --color-text-light: #222222;
   --color-background-light: #fff;
+  --color-body-background-light: #d7d8d9;
   --color-cta-light: #ff8c00;
 
   /* Dark Theme Variables */
   --color-text-dark: #d7d8d9;
   --color-background-dark: #121212;
+  --color-body-background-dark: #222222;
   --color-cta-dark: #ff8c00;
 }
 
 .light-theme {
   --color-text: var(--color-text-light);
   --color-background: var(--color-background-light);
+  --color-body-background: var(--color-body-background-light);
   --color-cta: var( --color-cta-light);
 }
 
 .dark-theme {
   --color-text: var(--color-text-dark);
   --color-background: var(--color-background-dark);
+  --color-body-background: var(--color-body-background-dark);
   --color-cta: var( --color-cta-dark);
 }
 
@@ -196,6 +205,7 @@ ul {
   justify-content: space-between;
   opacity: 0;
   z-index: 99999999;
+  pointer-events: none;
 }
 
 .navbar-brand {
@@ -205,20 +215,10 @@ ul {
   letter-spacing: 0.02em;
   color: var(--color-text);
   text-decoration: none;
+  pointer-events: auto;
 }
 .navbar-right {
   display: flex;
-}
-
-.navbar-button {
-  padding: 1rem 1.5rem;
-  border: none;
-  border-radius: 500px;
-  background-color: var(--color-cta);
-  color: var(--color-text-light);
-  font-size: 1.2rem;
-  cursor: pointer;
-  margin-left: 2rem;
 }
 
 /* Toggle */
@@ -229,6 +229,7 @@ ul {
   justify-content: center;
   align-items: center;
   z-index: 99999;
+  pointer-events: auto;
 }
 
 .sun-wrapper,
@@ -498,6 +499,7 @@ footer {
     top: 1.5rem;
     width: calc(100% - 4rem);
     align-items: flex-start;
+    max-height: 100vh - 10rem;
   }
 
   .navbar-right {
@@ -512,15 +514,6 @@ footer {
     max-height: 2rem;
   }
 
-  .navbar-button {
-    position: fixed;
-    bottom: 3.5rem;
-    left: 0;
-    font-size: 1rem;
-    z-index: 9999999999;
-    margin-left: 0;
-  }
-
   .section {
     width: 100%;
     padding: 20rem 2rem;
@@ -532,11 +525,11 @@ footer {
   }
 
   .hero-main {
-    bottom: 6.5rem;
+    bottom: 2.2rem;
   }
 
   .hero-second {
-    top: calc(50% - 12rem);
+    top: calc(50% - 5rem);
   }
 
   .hero-wrapper {
