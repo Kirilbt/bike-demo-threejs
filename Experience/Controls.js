@@ -142,14 +142,7 @@ export default class Controls {
           y: -0.5324252706006514,
           z: -0.45011986145587835
         }, "same")
-        .fromTo(this.zoom, {
-          zoomValue: 1,
-          onUpdate: () => {
-            this.camera.perspectiveCamera.zoom = this.zoom.zoomValue
-            this.camera.perspectiveCamera.updateProjectionMatrix()
-          }
-        },
-        {
+        .to(this.zoom, {
           zoomValue: 3,
           onUpdate: () => {
             this.camera.perspectiveCamera.zoom = this.zoom.zoomValue
@@ -291,14 +284,7 @@ export default class Controls {
           y: -0.7487373908008822,
           z: -0.3426445418872183
         }, "same")
-        .fromTo(this.zoom, {
-          zoomValue: 1,
-          onUpdate: () => {
-            this.camera.perspectiveCamera.zoom = this.zoom.zoomValue
-            this.camera.perspectiveCamera.updateProjectionMatrix()
-          }
-        },
-        {
+        .to(this.zoom, {
           zoomValue: 2.3,
           onUpdate: () => {
             this.camera.perspectiveCamera.zoom = this.zoom.zoomValue
