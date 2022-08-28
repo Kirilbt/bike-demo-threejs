@@ -242,7 +242,13 @@ export default class Bike {
           }, 'same')
         }
 
-        if(child.name === 'Preloader') {
+        if(child.name === 'BoxFace1') {
+          child.material.color.set(0x111111)
+        } else if (child.name === 'BoxFace2') {
+          child.material.color.set(0x111111)
+        } else if (child.name === 'BoxFace3') {
+          child.material.color.set(0x111111)
+        } else if (child.name === 'BoxFace4') {
           child.material.color.set(0x111111)
         }
       })
@@ -256,7 +262,13 @@ export default class Bike {
           }, 'same')
         }
 
-        if(child.name === 'Preloader') {
+        if(child.name === 'BoxFace1') {
+          child.material.color.set(0xd7d8d9)
+        } else if (child.name === 'BoxFace2') {
+          child.material.color.set(0xd7d8d9)
+        } else if (child.name === 'BoxFace3') {
+          child.material.color.set(0xd7d8d9)
+        } else if (child.name === 'BoxFace4') {
           child.material.color.set(0xd7d8d9)
         }
       })
