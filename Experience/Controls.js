@@ -130,7 +130,7 @@ export default class Controls {
         },
         {
           x: () => {
-            if(this.sizes.width > 1300) {
+            if(this.sizes.width > 1300 && this.sizes.height < 1000) {
               return -5.2
             } else {
               return -5
@@ -171,7 +171,7 @@ export default class Controls {
         }, 'same')
         .to(this.camera.perspectiveCamera.position, {
           x: () => {
-            if(this.sizes.width > 1300) {
+            if(this.sizes.width > 1300 && this.sizes.height < 1000) {
               return -6.7
             } else {
               return -7
@@ -207,7 +207,7 @@ export default class Controls {
         }, 'same')
         .to(this.camera.perspectiveCamera.position, {
           x: () => {
-            if(this.sizes.width > 1300) {
+            if(this.sizes.width > 1300  && this.sizes.height < 1000) {
               return -4.25
             } else {
               return -4.1
@@ -243,7 +243,7 @@ export default class Controls {
         }, 'same')
         .to(this.camera.perspectiveCamera.position, {
           x: () => {
-            if(this.sizes.width > 1300) {
+            if(this.sizes.width > 1300  && this.sizes.height < 1000) {
               return 2.2
             } else {
               return 2
