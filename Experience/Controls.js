@@ -129,7 +129,13 @@ export default class Controls {
           z: 4
         },
         {
-          x: -5,
+          x: () => {
+            if(this.sizes.width > 1300) {
+              return -5.2
+            } else {
+              return -5
+            }
+          },
           y: 6,
         }, 'same')
         .fromTo(this.camera.perspectiveCamera.rotation, {
@@ -164,7 +170,13 @@ export default class Controls {
           y: -Math.PI / 4,
         }, 'same')
         .to(this.camera.perspectiveCamera.position, {
-          x: -7,
+          x: () => {
+            if(this.sizes.width > 1300) {
+              return -6.7
+            } else {
+              return -7
+            }
+          },
           y: 2,
         }, 'same')
         .to(this.camera.perspectiveCamera.rotation, {
@@ -194,7 +206,13 @@ export default class Controls {
           y: -Math.PI,
         }, 'same')
         .to(this.camera.perspectiveCamera.position, {
-          x: -4.1,
+          x: () => {
+            if(this.sizes.width > 1300) {
+              return -4.25
+            } else {
+              return -4.1
+            }
+          },
           y: 3
         }, 'same')
         .to(this.camera.perspectiveCamera.rotation, {
@@ -224,7 +242,13 @@ export default class Controls {
           y: -Math.PI / 2,
         }, 'same')
         .to(this.camera.perspectiveCamera.position, {
-          x: 2,
+          x: () => {
+            if(this.sizes.width > 1300) {
+              return 2.2
+            } else {
+              return 2
+            }
+          },
           y: 1,
           z: 4,
         }, 'same')
