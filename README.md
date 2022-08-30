@@ -14,7 +14,7 @@ This fictive project was created to showcase my current skills using Three.js an
 ### Built with <a name="builtwith"></a>
 
 - HTML, CSS, Javascript
-- Three.JS
+- Three.js
 - GSAP
 - Vite
 
@@ -22,4 +22,4 @@ This fictive project was created to showcase my current skills using Three.js an
 
 - [Kiril Bernard Tucker](https://github.com/Kirilbt)
 
-Special thanks to Andrew Woan, Bruno Simon and everyone on the Three.Js Journey's discord who helped with my many questions.
+Special thanks to Andrew Woan, Bruno Simon and everyone on the Three.Js Journey's discord who helped me.
