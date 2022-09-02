@@ -16,6 +16,7 @@ This fictive project was created to showcase my current skills using Three.js an
 - HTML, CSS, Javascript
 - Three.js
 - GSAP
+- ASScroll
 - Vite
 
 ## Authors
